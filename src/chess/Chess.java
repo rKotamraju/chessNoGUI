@@ -5,18 +5,33 @@ import java.util.Scanner;
 public class Chess {
 
     public static void main(String[] args) {
-        System.out.println("This is our chess game!");
 
+        boolean gameOn = true;
+        boolean isWhiteTurn = true;
         Scanner in = new Scanner(System.in);
+        String move;
 
-        String s = in.nextLine();
-        System.out.println(s);
+        while(gameOn){
 
-        String a = in.nextLine();
-        System.out.println(a);
+            if(isWhiteTurn){
+                System.out.print("White's Move: ");
+                move = in.nextLine();
+            } else{
+                System.out.print("Black's Move: ");
+                move = in.nextLine();
+            }
 
-        String b = in.nextLine();
-        System.out.println(b);
+            if(move.equals("resign")){
+                if(isWhiteTurn){
+                    System.out.println("Black Wins");
+                } else {
+                    System.out.println("White Wins");
+                }
+                gameOn = false;
+            }
+            isWhiteTurn = !(isWhiteTurn);
+        }
+
     }
 
 }
