@@ -11,6 +11,8 @@ public class Chess {
         Scanner in = new Scanner(System.in);
         String move;
 
+        Piece[][] board = new Piece[8][8];
+
         while(gameOn){
 
             if(isWhiteTurn){
