@@ -42,19 +42,32 @@ public class Chess {
     public static void setBoard(Piece[][] board){
 
         //["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
+        //Write this more efficeintly
 
-        for(int r = 0; r<board.length; r++){
-            for(int c = 0; c<(board[r].length)/2; c++){
-                if(r == 1) {
-                    board[r][c] = new Pawn(false);
-                    board[7-r][7-c] = new Pawn(false);
-                }
-                if(r == 6){
-                    board[r][c] = new Pawn(true);
-                    board[7-r][7-c] = new Pawn(true);
-                }
-            }
+        board[0][0] = new Rook(false);
+        board[0][7] = new Rook(false);
+        board[0][1] = new Bishop(false);
+        board[0][6] = new Bishop(false);
+        board[0][2] = new Knight(false);
+        board[0][5] = new Knight(false);
+        board[0][3] = new Queen(false);
+        board[0][4] = new King(false);
+
+        board[7][0] = new Rook(true);
+        board[7][7] = new Rook(true);
+        board[7][1] = new Bishop(true);
+        board[7][6] = new Bishop(true);
+        board[7][2] = new Knight(true);
+        board[7][5] = new Knight(true);
+        board[7][3] = new Queen(true);
+        board[7][4] = new King(true);
+
+
+        for(int c = 0; c<(board[0].length); c++){
+                board[1][c] = new Pawn(false);
+                board[6][c] = new Pawn(true);
         }
+
     }
 
     public static void printBoard(Piece[][] board){
