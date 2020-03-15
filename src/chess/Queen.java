@@ -9,7 +9,7 @@ public class Queen extends Piece{
 
     @Override
     public boolean move(String omove, String nmove) {
-        System.out.println("Player is moving a Pawn");
+        System.out.println("Player is moving a Queen");
 
         return false;
     }

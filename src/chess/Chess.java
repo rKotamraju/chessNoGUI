@@ -1,5 +1,6 @@
 package chess;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Chess {
@@ -33,10 +34,45 @@ public class Chess {
                     System.out.println("White Wins");
                 }
                 gameOn = false;
+            } else if (move.equals("draw")){
+                //work with draws here
+            } else {
+
+                //we are using 7 instead of 8 because if getValue returned a 0, we would go out of bounds
+                String[] moves = move.split(" ");
+                int oFile = getValue(moves[0].charAt(0));
+                int oRank = 7-getValue(moves[0].charAt(1));
+                int nFile = getValue(moves[1].charAt(0));
+                int nRank = 7-getValue(moves[1].charAt(1));
+
+                if(board[oRank][oFile] != null) {
+                    System.out.println(board[oRank][oFile]);
+                    board[oRank][oFile].move(moves[0], moves[1]);
+                } else {
+                    System.out.println("MOVE IS INVALID");
+                }
             }
+
+            //end turn code
+            System.out.println();
             isWhiteTurn = !(isWhiteTurn);
         }
 
+    }
+
+    public static int getValue(char c){
+        HashMap<Character, Integer> hashmap = new HashMap<Character, Integer>();
+
+        hashmap.put('a', 0); hashmap.put('1', 0);
+        hashmap.put('b', 1); hashmap.put('2', 1);
+        hashmap.put('c', 2); hashmap.put('3', 2);
+        hashmap.put('d', 3); hashmap.put('4', 3);
+        hashmap.put('e', 4); hashmap.put('5', 4);
+        hashmap.put('f', 5); hashmap.put('6', 5);
+        hashmap.put('g', 6); hashmap.put('7', 6);
+        hashmap.put('h', 7); hashmap.put('8', 7);
+
+        return hashmap.get(c);
     }
 
     public static void setBoard(Piece[][] board){
@@ -90,7 +126,7 @@ public class Chess {
         for(int i = 0; i<8; i++){
             System.out.print(" "+(char)(97+i)+" ");
         }
-        System.out.println();
+        System.out.println("\n");
 
     }
 
