@@ -1,10 +1,10 @@
 package chess;
 
-public class Pawn extends Piece{
+public class Bishop extends Piece{
 
-    public Pawn(boolean isWhite){
+    public Bishop(boolean isWhite){
         this.isWhite = isWhite;
-        this.name = isWhite ? "wp" : "bp";
+        this.name = isWhite ? "wB" : "bB";
     }
 
     @Override

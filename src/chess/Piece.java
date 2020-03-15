@@ -6,6 +6,10 @@ public abstract class Piece {
     boolean isWhite;
     String name;
 
-    public abstract void move();
+    public abstract boolean move(String omove, String nmove);
+
+    public String toString(){
+        return name;
+    }
 
 }
