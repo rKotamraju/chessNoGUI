@@ -78,7 +78,7 @@ public class Chess {
     public static void setBoard(Piece[][] board){
 
         //["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
-        //Write this more efficeintly
+        //Write this more efficiently
 
         board[0][0] = new Rook(false);
         board[0][7] = new Rook(false);
