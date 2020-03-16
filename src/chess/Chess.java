@@ -46,8 +46,19 @@ public class Chess {
                 int nRank = 7-getValue(moves[1].charAt(1));
 
                 if(board[oRank][oFile] != null) {
-                    System.out.println(board[oRank][oFile]);
-                    board[oRank][oFile].move(moves[0], moves[1]);
+                    if(board[nRank][nFile]==null){
+                        System.out.println(board[oRank][oFile]);
+                        if(board[oRank][oFile].move(moves[0], moves[1]) == true){
+                            System.out.println("Moved piece");
+                            board[nRank][nFile] = board[oRank][oFile];
+                            board[oRank][oFile] = null;
+                        }else{
+                            System.out.println("MOVE IS INVALID");
+                        }
+                    }else{
+                        System.out.println("MOVE IS INVALID");
+                    }
+
                 } else {
                     System.out.println("MOVE IS INVALID");
                 }
