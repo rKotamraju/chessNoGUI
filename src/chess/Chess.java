@@ -16,10 +16,9 @@ public class Chess {
 
 
         setBoard(board);
+        printBoard(board);
 
         while(gameOn){
-
-            printBoard(board);
             if(isWhiteTurn){
                 System.out.print("White's Move: ");
                 move = in.nextLine();
@@ -46,22 +45,24 @@ public class Chess {
                 int nFile = getValue(moves[1].charAt(0));
                 int nRank = 7-getValue(moves[1].charAt(1));
 
-                if(board[oRank][oFile] != null) {
-                        System.out.println(board[oRank][oFile]);
-                        if(board[oRank][oFile].move(moves[0], moves[1], board, nFile, nRank) == true){
-                            System.out.println("Moved piece");
+                if(board[oRank][oFile] != null && (isWhiteTurn == board[oRank][oFile].isWhite)) {
+                        if(board[oRank][oFile].move(moves[0], moves[1], board, oFile, oRank, nFile, nRank) == true){
+                            System.out.println(board[oRank][oFile]);
                             board[nRank][nFile] = board[oRank][oFile];
                             board[oRank][oFile] = null;
                         }else{
                             System.out.println("MOVE IS INVALID");
+                            continue; // this should act as a redo
                         }
                 } else {
                     System.out.println("MOVE IS INVALID");
+                    continue;
                 }
             }
 
             //end turn code
             System.out.println();
+            printBoard(board);
             isWhiteTurn = !(isWhiteTurn);
         }
 
