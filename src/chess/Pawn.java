@@ -42,11 +42,7 @@ public class Pawn extends Piece{
                 return false;
             }
 
-        }
-
-
-        else{ //normal move, not killing
-
+        } else{ //normal move, not killing
             if(board[nRank][nFile] != null){
                 return false;
             }
@@ -70,19 +66,14 @@ public class Pawn extends Piece{
                     //System.out.println("invalid move");
                     return false;
                 }
-            }
-
-            else if(newRank-oldRank == 1){
+            } else if(newRank-oldRank == 1){
                 hasMoved = true;
                 return true;
-            }
-            else{
+            } else{
                 // System.out.println("invalid move");
                 return false;
             }
-        }
-
-        else{ //if black
+        } else{ //if black
             if(newRank-oldRank == -2){
                 if(hasMoved == false){
                     hasMoved = true;
@@ -92,13 +83,10 @@ public class Pawn extends Piece{
                     //System.out.println("invalid move");
                     return false;
                 }
-            }
-
-            else if(newRank-oldRank == -1){
+            } else if(newRank-oldRank == -1){
                 hasMoved = true;
                 return true;
-            }
-            else{
+            } else{
                 // System.out.println("invalid move");
                 return false;
             }

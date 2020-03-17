@@ -4,7 +4,7 @@ public class Knight extends Piece{
 
     public Knight(boolean isWhite){
         this.isWhite = isWhite;
-        this.name = isWhite ? "wK" : "bK";
+        this.name = isWhite ? "wN" : "bN";
     }
 
     @Override
