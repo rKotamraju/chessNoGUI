@@ -18,7 +18,7 @@ public class Chess {
         setBoard(board);
         printBoard(board);
 
-        while(gameOn){
+        while(gameOn){ //can change to true actually
             if(isWhiteTurn){
                 System.out.print("White's Move: ");
                 move = in.nextLine();
@@ -33,7 +33,8 @@ public class Chess {
                 } else {
                     System.out.println("White Wins");
                 }
-                gameOn = false;
+                //gameOn = false;
+                break; //-- gameOver;
             } else if (move.equals("draw")){
                 //work with draws here
             } else {

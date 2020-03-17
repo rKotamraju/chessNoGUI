@@ -37,7 +37,7 @@ public class Rook extends Piece{
             }
 
             if(board[nRank][nFile] != null){
-                if(board[oRank][nFile].isWhite == board[nRank][nFile].isWhite){
+                if(board[oRank][oFile].isWhite == board[nRank][nFile].isWhite){
                     System.out.println("Don't kill ur friend");
                     return false;
                 } else {
