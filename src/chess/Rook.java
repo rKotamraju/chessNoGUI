@@ -11,8 +11,7 @@ public class Rook extends Piece{
     public boolean move(String omove, String nmove, Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
         System.out.println("Player is moving a Rook");
 
-        if(logicalXOR(oFile == nFile, oRank == nRank)){ //Either Files have to be the same or Ranks have to be the but not both
-
+        if((oFile == nFile) ^ (oRank == nRank)){ //Logical XOR, Either Files have to be the same or Ranks have to be the but not both
             int minRank = Math.min(oRank, nRank);
             int maxRank = Math.max(oRank, nRank);
 
@@ -52,7 +51,4 @@ public class Rook extends Piece{
         return false;
     }
 
-    public static boolean logicalXOR(boolean x, boolean y) {
-        return ( ( x || y ) && ! ( x && y ) );
-    }
 }
