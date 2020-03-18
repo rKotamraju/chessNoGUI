@@ -12,11 +12,13 @@ public class Pawn extends Piece{
 
         System.out.println("Player is moving a Pawn");
 
+
         int oldRank = Integer.parseInt(String.valueOf(omove.charAt(1)));
         char oldFile = omove.charAt(0);
 
         int newRank = Integer.parseInt(String.valueOf(nmove.charAt(1)));
         char newFile = nmove.charAt(0);
+        System.out.println("Moving from " + oFile + " " + oldRank + " to " + nFile + " " + newRank);
 
         if(oldFile != newFile){ //checks if you are killing another piece
             if(board[nRank][nFile] == null){ //cannot go diagonal if there is nothing to kill
@@ -31,12 +33,12 @@ public class Pawn extends Piece{
             }
 
             if(newFile == orderOfRanks[i+1] || newFile == orderOfRanks[i-1]){
-                    if(checkColor(oldRank, newRank)==true){
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
+                if(checkColor(board, oldRank, newRank, nFile)==true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
             else{
                 return false;
@@ -46,7 +48,7 @@ public class Pawn extends Piece{
             if(board[nRank][nFile] != null){
                 return false;
             }
-            if(checkColor(oldRank, newRank) == true){
+            if(checkColor(board, oldRank, newRank, nFile) == true){
                 return true;
             }
             else{
@@ -55,10 +57,14 @@ public class Pawn extends Piece{
         }
     }
 
-    public boolean checkColor(int oldRank, int newRank){ //cannot use Math.abs because then you could move backwards
+    public boolean checkColor(Piece[][] board, int oldRank, int newRank, int nFile){ //cannot use Math.abs because then you could move backwards
         if(isWhite == true){
             if(newRank-oldRank == 2){
                 if(hasMoved == false){
+                    if(board[(newRank+1)][nFile] != null){ //if there is something in the way
+                        System.out.println("can't jump");
+                        return false;
+                    }
                     hasMoved = true;
                     return true;
 
@@ -76,6 +82,10 @@ public class Pawn extends Piece{
         } else{ //if black
             if(newRank-oldRank == -2){
                 if(hasMoved == false){
+                    /*if(board[(oldRank-1)][nFile] != null){ //if there is something in the way
+                        System.out.println("can't jump");
+                        return false;
+                    }*/
                     hasMoved = true;
                     return true;
 

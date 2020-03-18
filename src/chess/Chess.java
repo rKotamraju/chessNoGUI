@@ -47,6 +47,7 @@ public class Chess {
                 int nRank = 7-getValue(moves[1].charAt(1));
 
                 if(board[oRank][oFile] != null && (isWhiteTurn == board[oRank][oFile].isWhite)) {
+                   // System.out.println("Moving from " + oFile + " " + oRank + " to " + nFile + " " + nRank);
                         if(board[oRank][oFile].move(moves[0], moves[1], board, oFile, oRank, nFile, nRank) == true){
                             System.out.println(board[oRank][oFile]);
                             board[nRank][nFile] = board[oRank][oFile];
