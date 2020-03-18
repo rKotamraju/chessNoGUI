@@ -12,6 +12,18 @@ public class Knight extends Piece{
         System.out.println("Player is moving a Knight");
 
 
+        if((Math.abs(oFile-nFile)+Math.abs(oRank-nRank) == 3) && (oFile != nFile && oRank != nRank)){
+            if (board[nRank][nFile] != null) {
+                if (board[oRank][oFile].isWhite == board[nRank][nFile].isWhite) {
+                    System.out.println("Don't kill ur friend");
+                    return false;
+                } else {
+                    System.out.println("Slayed");
+                    return true;
+                }
+            }
+            return true;
+        }
 
         return false;
     }
