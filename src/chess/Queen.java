@@ -9,7 +9,7 @@ public class Queen extends Piece{
 
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
-        System.out.println("Player is moving a Queen");
+        System.out.println("Player is moving a "+name);
 
         if(moveStraight(board, oFile, oRank, nFile, nRank)){
             return true;
