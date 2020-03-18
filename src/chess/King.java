@@ -8,7 +8,7 @@ public class King extends Piece{
     }
 
     @Override
-    public boolean move(String omove, String nmove, Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
+    public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
         System.out.println("Player is moving a King");
 
 

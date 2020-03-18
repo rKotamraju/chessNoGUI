@@ -8,32 +8,91 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public boolean move(String omove, String nmove, Piece[][] board, int oFile, int oRank, int nFile, int nRank) {
+    public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank) {
 
         System.out.println("Player is moving a Pawn");
 
+        if(oFile == nFile){ //normal move, not killing anyone
+                if(board[nRank][nFile]!=null){
+                    System.out.println("Cant move to a taken spot!");
+                    return false; //trying to move to an occupied space
+                }
 
-        int oldRank = Integer.parseInt(String.valueOf(omove.charAt(1)));
-        char oldFile = omove.charAt(0);
+                System.out.println("Has made it to checkMove");
+                if(checkMove(board, oFile, oRank, nFile, nRank)){
+                    return true;
+                }else{
+                    return false;
+                }
+        }
 
-        int newRank = Integer.parseInt(String.valueOf(nmove.charAt(1)));
-        char newFile = nmove.charAt(0);
-        System.out.println("Moving from " + oFile + " " + oldRank + " to " + nFile + " " + newRank);
-
-        if(oldFile != newFile){ //checks if you are killing another piece
-            if(board[nRank][nFile] == null){ //cannot go diagonal if there is nothing to kill
+        else{ //killing, moving diagonal
+            if(board[nRank][nFile] == null){
+                System.out.println("Cannot kill nothing!");
                 return false;
             }
+            //check that you are killing opposite color
+            if((isWhite && board[nRank][nFile].isWhite) || ((!isWhite) && !(board[nRank][nFile].isWhite))){
+                System.out.println("Dont kill your friend hoe!");
+                return false;
+            }
+            if(isWhite && (nRank-oRank == -1) && (Math.abs(nFile-oFile) == 1)){
+                hasMoved = true;
+                return true;
+            }
+            else if(!isWhite && (nRank-oRank == 1) && (Math.abs(nFile-oFile)==1)){
+                hasMoved=true;
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
 
-            int i;
-            for(i = 0; i < orderOfRanks.length;i++){
-                if(orderOfRanks[i] == oldFile){
-                    break;
+    public boolean checkMove (Piece[][] board, int oFile, int oRank, int nFile, int nRank){
+        if(isWhite){
+            //check if one space
+
+            if((nRank - oRank) == -1){
+                hasMoved = true;
+                return true;
+            }
+            //check if two space
+            else if((nRank-oRank) == -2){
+                if(hasMoved == true){
+                    System.out.println("Not first move! Cannot go two spaces");
+                    return false;
+                }
+                //check middle space
+
+                if(board[nRank+1][oFile]==null){
+                    hasMoved = true;
+                    return true;
+                }
+                else{
+                    System.out.println("Cannot jump over");
+                    return false;
                 }
             }
-
-            if(newFile == orderOfRanks[i+1] || newFile == orderOfRanks[i-1]){
-                if(checkColor(board, oldRank, newRank, nFile)==true){
+            else{
+                return false;
+            }
+        }
+        else{ //Black
+            //check if 1 space
+            if((nRank - oRank) == 1){
+                hasMoved = true;
+                return true;
+            }
+            //check if 2 spaces
+            if((nRank - oRank) == 2){
+                if(hasMoved == true){
+                    System.out.println("Cannot move two spaces if not first turn");
+                    return false;
+                }
+                if(board[nRank-1][oFile] == null){
+                    hasMoved = true;
                     return true;
                 }
                 else{
@@ -44,62 +103,7 @@ public class Pawn extends Piece{
                 return false;
             }
 
-        } else{ //normal move, not killing
-            if(board[nRank][nFile] != null){
-                return false;
-            }
-            if(checkColor(board, oldRank, newRank, nFile) == true){
-                return true;
-            }
-            else{
-                return false;
-            }
         }
     }
 
-    public boolean checkColor(Piece[][] board, int oldRank, int newRank, int nFile){ //cannot use Math.abs because then you could move backwards
-        if(isWhite == true){
-            if(newRank-oldRank == 2){
-                if(hasMoved == false){
-                    if(board[(newRank+1)][nFile] != null){ //if there is something in the way
-                        System.out.println("can't jump");
-                        return false;
-                    }
-                    hasMoved = true;
-                    return true;
-
-                }else{
-                    //System.out.println("invalid move");
-                    return false;
-                }
-            } else if(newRank-oldRank == 1){
-                hasMoved = true;
-                return true;
-            } else{
-                // System.out.println("invalid move");
-                return false;
-            }
-        } else{ //if black
-            if(newRank-oldRank == -2){
-                if(hasMoved == false){
-                    /*if(board[(oldRank-1)][nFile] != null){ //if there is something in the way
-                        System.out.println("can't jump");
-                        return false;
-                    }*/
-                    hasMoved = true;
-                    return true;
-
-                }else{
-                    //System.out.println("invalid move");
-                    return false;
-                }
-            } else if(newRank-oldRank == -1){
-                hasMoved = true;
-                return true;
-            } else{
-                // System.out.println("invalid move");
-                return false;
-            }
-        }
-    }
 }

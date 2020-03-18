@@ -8,7 +8,7 @@ public class Rook extends Piece{
     }
 
     @Override
-    public boolean move(String omove, String nmove, Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
+    public boolean move( Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
         System.out.println("Player is moving a Rook");
 
         if((oFile == nFile) ^ (oRank == nRank)){ //Logical XOR, Either Files have to be the same or Ranks have to be the but not both
