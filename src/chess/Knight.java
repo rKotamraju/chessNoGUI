@@ -12,6 +12,7 @@ public class Knight extends Piece{
         System.out.println("Player is moving a Knight");
 
 
+
         return false;
     }
 }
