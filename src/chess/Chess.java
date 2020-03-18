@@ -46,6 +46,11 @@ public class Chess {
                 int nFile = getValue(moves[1].charAt(0));
                 int nRank = 7-getValue(moves[1].charAt(1));
 
+                if(oFile == -1 || oRank == 8 || nFile == -1 || nRank == 8){ //we set Ranks to 8 bc lines 45 and 47
+                    System.out.println("MOVE IS OUTOFBOUNDS");
+                    continue;
+                }
+
                 if(board[oRank][oFile] != null && (isWhiteTurn == board[oRank][oFile].isWhite)) {
                    // System.out.println("Moving from " + oFile + " " + oRank + " to " + nFile + " " + nRank);
                         if(board[oRank][oFile].move(board, oFile, oRank, nFile, nRank) == true){
@@ -82,7 +87,11 @@ public class Chess {
         hashmap.put('g', 6); hashmap.put('7', 6);
         hashmap.put('h', 7); hashmap.put('8', 7);
 
-        return hashmap.get(c);
+        try {
+            return hashmap.get(c);
+        } catch (NullPointerException e){
+            return -1;
+        }
     }
 
     public static void setBoard(Piece[][] board){
