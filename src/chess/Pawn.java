@@ -33,7 +33,7 @@ public class Pawn extends Piece{
             }
             //check that you are killing opposite color
             if((isWhite && board[nRank][nFile].isWhite) || ((!isWhite) && !(board[nRank][nFile].isWhite))){
-                System.out.println("Dont kill your friend hoe!");
+                System.out.println("Dont kill your friend!");
                 return false;
             }
             if(isWhite && (nRank-oRank == -1) && (Math.abs(nFile-oFile) == 1)){
