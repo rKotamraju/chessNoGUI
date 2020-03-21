@@ -4,6 +4,10 @@ public class King extends Queen{
 
     public King(boolean isWhite){
         super(isWhite);
+
+        this.rank = isWhite ? 7 : 0;
+        this.file = 4;
+
         this.name = isWhite ? "wK" : "bK";
     }
 
@@ -18,8 +22,20 @@ public class King extends Queen{
             return false;
         }
 
-        return super.move(board, oFile, oRank, nFile, nRank);
+        if(super.move(board, oFile, oRank, nFile, nRank)){
+            setKingPosition(nRank, nFile);
+            return true;
+        }
 
+        return false;
+
+    }
+
+    public boolean setKingPosition(int rank, int file){
+        this.file = file;
+        this.rank = rank;
+
+        return true;
 
     }
 }
