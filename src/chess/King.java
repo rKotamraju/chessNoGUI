@@ -21,12 +21,13 @@ public class King extends Queen{
             System.out.println("King can only move one space");
             return false;
         }
+        setKingPosition(nRank, nFile);
 
-        if(super.move(board, oFile, oRank, nFile, nRank)){
-            setKingPosition(nRank, nFile);
+        if(super.move(board, oFile, oRank, nFile, nRank)&& (Chess.check(board, this)==false)){
             return true;
         }
 
+        setKingPosition(oRank,oFile);
         return false;
 
     }

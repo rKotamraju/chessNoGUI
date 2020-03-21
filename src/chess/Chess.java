@@ -96,22 +96,25 @@ public class Chess {
                         }
 
                     }else{
+
                         System.out.println("MOVE IS INVALID");
                         continue; // this should act as a redo
                     }
                 } else {
+                    System.out.println("WE ARE ON LINE 104");
                     System.out.println("MOVE IS INVALID");
                     continue;
                 }
 
                 //invalid
-                if(check(board, isWhiteTurn ? whiteKing : blackKing)){
-                    System.out.println("MOVE IS INVALID");
-                    continue;
-                }
+//                if(check(board, isWhiteTurn ? whiteKing : blackKing)){
+//                    printBoard(board);
+//                    System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
+//                    continue;
+//                }
 
                 //opposite
-                check = check(board, isWhiteTurn ? blackKing : whiteKing);
+                //check = check(board, isWhiteTurn ? blackKing : whiteKing);
 
             }
 
@@ -216,9 +219,12 @@ public class Chess {
 
         for(int r = 0; r<board.length; r++){
             for(int f = 0; f<board[r].length; f++){
-                if((board[r][f] != null) && (board[r][f].move(board, f, r, king.file, king.rank) == true)){
-                    System.out.println(board[r][f]);
-                    return true;
+                if((board[r][f] != null)  && (board[r][f].isWhite != king.isWhite)){
+                    if( (board[r][f].move(board, f, r, king.file, king.rank) == true) ){
+                        System.out.println(board[r][f]);
+                        return true;
+                    }
+
                 }
             }
         }
