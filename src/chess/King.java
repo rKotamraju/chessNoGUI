@@ -19,5 +19,7 @@ public class King extends Queen{
         }
 
         return super.move(board, oFile, oRank, nFile, nRank);
+
+
     }
 }

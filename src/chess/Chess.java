@@ -18,6 +18,7 @@ public class Chess {
         setBoard(board);
         printBoard(board);
 
+
         while(gameOn){ //can change to true actually
             if(isWhiteTurn){
                 System.out.print("White's Move: ");
@@ -35,8 +36,17 @@ public class Chess {
                 }
                 //gameOn = false;
                 break; //-- gameOver;
-            } else if (move.equals("draw")){
-                //work with draws here
+            } else if(move.substring(move.lastIndexOf(" ")+1).equals("draw?")){
+                    if(isWhiteTurn){
+                        System.out.print("Black's Move: ");
+                    }
+                    else{
+                        System.out.print("White's Move: ");
+                    }
+                    move = in.nextLine();
+                    if(move.equals("draw")){
+                        break; //game over
+                    }
             } else {
 
                 //we are using 7 instead of 8 because if getValue returned a 0, we would go out of bounds
@@ -47,7 +57,7 @@ public class Chess {
                 int nRank = 7-getValue(moves[1].charAt(1));
 
                 if(oFile == -1 || oRank == 8 || nFile == -1 || nRank == 8){ //we set Ranks to 8 bc lines 45 and 47
-                    System.out.println("MOVE IS OUTOFBOUNDS");
+                    System.out.println("MOVE IS OUT OF BOUNDS");
                     continue;
                 }
 
@@ -57,6 +67,7 @@ public class Chess {
                             System.out.println(board[oRank][oFile]);
                             board[nRank][nFile] = board[oRank][oFile];
                             board[oRank][oFile] = null;
+
                         }else{
                             System.out.println("MOVE IS INVALID");
                             continue; // this should act as a redo
@@ -65,6 +76,7 @@ public class Chess {
                     System.out.println("MOVE IS INVALID");
                     continue;
                 }
+
             }
 
             //end turn code
@@ -148,5 +160,6 @@ public class Chess {
         System.out.println("\n");
 
     }
+
 
 }

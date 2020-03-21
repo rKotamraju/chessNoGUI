@@ -50,10 +50,11 @@ public class Queen extends Piece{
                     return false;
                 } else {
                     System.out.println("Slayed");
+                    isKing(nRank, nFile);
                     return true;
                 }
             }
-
+            isKing(nRank, nFile);
             return true;
         }
 
@@ -89,12 +90,32 @@ public class Queen extends Piece{
                     return false;
                 } else {
                     System.out.println("Slayed");
+                    isKing(nRank, nFile);
                     return true;
                 }
             }
+            isKing(nRank, nFile);
             return true;
         }
         return false;
+    }
+
+    public void isKing(int nRank, int nFile){
+        if(name == "bK" || name == "wK") {
+            if (isWhite) {
+                whiteKingPosition[0] = nRank;
+                whiteKingPosition[1] = nFile;
+            } else {
+                blackKingPosition[0] = nRank;
+                blackKingPosition[1] = nFile;
+            }
+
+            for (int i = 0; i < 2; i++) {
+                System.out.println("white king: " + whiteKingPosition[i]);
+
+                System.out.println("black king : " + blackKingPosition[i]);
+            }
+        }
     }
 
 }
