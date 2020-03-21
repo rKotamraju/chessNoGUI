@@ -68,6 +68,29 @@ public class Chess {
                             board[nRank][nFile] = board[oRank][oFile];
                             board[oRank][oFile] = null;
 
+                            //checking if you put the opposite king in check
+                            /*System.out.println("Checking for check");
+                            int kingRank;
+                            int kingFile;
+                            if(board[nRank][nFile].isWhite){
+                                System.out.println("blackKing Rank: " + board[nFile][nRank].blackKingPosition[0]);
+                                System.out.println("blackKing File: " + board[nFile][nRank].blackKingPosition[1]);
+                                kingRank = board[nFile][nRank].blackKingPosition[0];
+                                kingFile = board[nFile][nRank].blackKingPosition[1];
+
+                            }
+                            else{
+                                kingRank = board[nFile][nRank].whiteKingPosition[0];
+                                kingFile = board[nFile][nRank].whiteKingPosition[1];
+                            }
+
+                            System.out.println("Extracted king's position to check");
+
+                            if(board[nRank][nFile].move(board,nFile, nRank,kingFile, kingRank) == true){
+                                System.out.println("Opposite King In Check");
+                            }
+                            */
+
                         }else{
                             System.out.println("MOVE IS INVALID");
                             continue; // this should act as a redo
