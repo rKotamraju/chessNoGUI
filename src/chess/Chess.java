@@ -85,8 +85,6 @@ public class Chess {
                         board[nRank][nFile] = board[oRank][oFile];
                         board[oRank][oFile] = null;
 
-                        System.out.println("printing something");
-
                         if(board[nRank][nFile] instanceof King){
                             if(isWhiteTurn){
                                 whiteKing = board[nRank][nFile];
@@ -107,12 +105,12 @@ public class Chess {
                 }
 
                 //invalid
-//                if(check(board, isWhiteTurn ? whiteKing : blackKing)){
-//                    //printBoard(board);
-//                    System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
-//                    reverseMove(board, oFile, oRank, nFile, nRank);
-//                    continue;
-//                }
+                if(check(board, isWhiteTurn ? whiteKing : blackKing)){
+                    //printBoard(board);
+                    System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
+                    reverseMove(board, oFile, oRank, nFile, nRank);
+                    continue;
+                }
 
                 //opposite
                 check = check(board, isWhiteTurn ? blackKing : whiteKing);
@@ -131,7 +129,10 @@ public class Chess {
     } //end of the main
 
     public static void reverseMove(Piece[][] board, int oFile, int oRank, int nFile, int nRank){
-        System.out.println("Reversing move");
+        System.out.println("Reversing move "+board[nRank][nFile]);
+        board[oRank][oFile] = board[nRank][nFile];
+        board[nRank][nFile] = null;
+
     }
 
     public static int getValue(char c){
