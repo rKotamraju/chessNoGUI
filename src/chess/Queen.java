@@ -9,7 +9,7 @@ public class Queen extends Piece{
 
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
-        System.out.println("Player is moving a "+name);
+        //System.out.println("Player is moving a "+name);
 
         if(moveStraight(board, oFile, oRank, nFile, nRank)){
             return true;
@@ -64,7 +64,7 @@ public class Queen extends Piece{
     public boolean moveDiagonally(Piece[][] board, int oFile, int oRank, int nFile, int nRank){
         if((nFile != oFile) && (nRank != oRank)) {
             double slope = ((double)(nRank - oRank)) / ((double)(nFile - oFile));
-            System.out.println("Slope: "+slope);
+            //System.out.println("Slope: "+slope);
 
             if (Math.abs(slope) != 1) {
                 System.out.println("Slope is not one");
