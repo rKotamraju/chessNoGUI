@@ -63,7 +63,8 @@ public class Queen extends Piece{
 
     public boolean moveDiagonally(Piece[][] board, int oFile, int oRank, int nFile, int nRank){
         if((nFile != oFile) && (nRank != oRank)) {
-            double slope = (nRank - oRank) / (nFile - oFile);
+            double slope = ((double)(nRank - oRank)) / ((double)(nFile - oFile));
+            System.out.println("Slope: "+slope);
 
             if (Math.abs(slope) != 1) {
                 System.out.println("Slope is not one");

@@ -9,7 +9,7 @@ public class Knight extends Piece{
 
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank) {
-        System.out.println("Player is moving a Knight");
+        System.out.println("Player is moving a"+name);
 
 
         if((Math.abs(oFile-nFile)+Math.abs(oRank-nRank) == 3) && (oFile != nFile && oRank != nRank)){

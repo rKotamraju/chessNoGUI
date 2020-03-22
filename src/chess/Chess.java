@@ -108,19 +108,16 @@ public class Chess {
 
                 //invalid
 //                if(check(board, isWhiteTurn ? whiteKing : blackKing)){
-//                    printBoard(board);
+//                    //printBoard(board);
 //                    System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
+//                    reverseMove(board, oFile, oRank, nFile, nRank);
 //                    continue;
 //                }
 
                 //opposite
-                //check = check(board, isWhiteTurn ? blackKing : whiteKing);
+                check = check(board, isWhiteTurn ? blackKing : whiteKing);
 
             }
-
-
-            System.out.println(whiteKing);
-            System.out.println(blackKing);
 
             System.out.println("BlackKing Position File "+blackKing.file+" Rank: "+blackKing.rank);
             System.out.println("WhiteKing Position File "+whiteKing.file+" Rank: "+whiteKing.rank);
@@ -131,6 +128,10 @@ public class Chess {
             isWhiteTurn = !(isWhiteTurn);
         }
 
+    } //end of the main
+
+    public static void reverseMove(Piece[][] board, int oFile, int oRank, int nFile, int nRank){
+        System.out.println("Reversing move");
     }
 
     public static int getValue(char c){
@@ -213,15 +214,14 @@ public class Chess {
             1. Before -- prevention bc otherwise invalid move
             2. After -- warning to the other player
          */
-//        if(board[rank][file].isWhite == king.isWhite){
-//            //you are putting your king in check -- INVALID MOVE
-//        }
-
+        System.out.println("Starting check");
         for(int r = 0; r<board.length; r++){
             for(int f = 0; f<board[r].length; f++){
                 if((board[r][f] != null)  && (board[r][f].isWhite != king.isWhite)){
                     if( (board[r][f].move(board, f, r, king.file, king.rank) == true) ){
-                        System.out.println(board[r][f]);
+                        System.out.println(board[r][f]+" this piece is can kill the king");
+                        System.out.println("King's File: "+king.file);
+                        System.out.println("King's Rank: "+king.rank);
                         return true;
                     }
 
@@ -234,7 +234,7 @@ public class Chess {
 
     public static boolean checkmate(){
 
-        //every move is false
+        //every move for the king is false
 
         return false;
     }
