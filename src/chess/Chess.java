@@ -33,6 +33,7 @@ public class Chess {
         Piece blackKing = board[0][4];
         boolean check = false;
 
+
         while(gameOn){ //can change to true actually
             if(check){
                 System.out.println("CHECK");
@@ -73,6 +74,8 @@ public class Chess {
                 int nFile = getValue(moves[1].charAt(0));
                 int nRank = 7-getValue(moves[1].charAt(1));
 
+                Piece newPosition = board[nRank][nFile];
+
                 if(oFile == -1 || oRank == 8 || nFile == -1 || nRank == 8){ //we set Ranks to 8 bc lines 45 and 47
                     System.out.println("MOVE IS OUT OF BOUNDS");
                     continue;
@@ -82,6 +85,7 @@ public class Chess {
                     // System.out.println("Moving from " + oFile + " " + oRank + " to " + nFile + " " + nRank);
                     if(board[oRank][oFile].move(board, oFile, oRank, nFile, nRank) == true){
                         System.out.println(board[oRank][oFile]);
+
                         board[nRank][nFile] = board[oRank][oFile];
                         board[oRank][oFile] = null;
 
@@ -108,7 +112,7 @@ public class Chess {
                 if(check(board, isWhiteTurn ? whiteKing : blackKing)){
                     //printBoard(board);
                     System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
-                    reverseMove(board, oFile, oRank, nFile, nRank);
+                    reverseMove(board, oFile, oRank, nFile, nRank, newPosition);
                     continue;
                 }
 
@@ -128,10 +132,10 @@ public class Chess {
 
     } //end of the main
 
-    public static void reverseMove(Piece[][] board, int oFile, int oRank, int nFile, int nRank){
+    public static void reverseMove(Piece[][] board, int oFile, int oRank, int nFile, int nRank, Piece newPosition){
         System.out.println("Reversing move "+board[nRank][nFile]);
         board[oRank][oFile] = board[nRank][nFile];
-        board[nRank][nFile] = null;
+        board[nRank][nFile] = newPosition;
 
     }
 
