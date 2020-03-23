@@ -5,8 +5,13 @@ public class King extends Queen{
     public King(boolean isWhite){
         super(isWhite);
 
-        this.rank = isWhite ? 7 : 0;
-        this.file = 4;
+        //this.rank = isWhite ? 7 : 0;
+        //this.file = 4;
+
+
+        //DELETE AFTER CHECKMATE TESTCASE
+        this.rank = isWhite ? 6 : 0;
+        this.file = isWhite ? 4 : 6;
 
         this.name = isWhite ? "wK" : "bK";
     }
@@ -23,7 +28,8 @@ public class King extends Queen{
         }
         setKingPosition(nRank, nFile);
 
-        if(super.move(board, oFile, oRank, nFile, nRank)&& (Chess.check(board, this)==false)){
+        if(super.move(board, oFile, oRank, nFile, nRank) && (Chess.check(board, this)==false)){
+            System.out.println("Updating King's position");
             return true;
         }
 

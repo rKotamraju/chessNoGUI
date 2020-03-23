@@ -29,8 +29,13 @@ public class Chess {
         setBoard(board);
         printBoard(board);
 
-        Piece whiteKing = board[7][4];
-        Piece blackKing = board[0][4];
+        //Piece whiteKing = board[7][4];
+        //Piece blackKing = board[0][4];
+
+        //DELETE AFTER CHECKMATE TESTCASE
+        Piece whiteKing = board[6][4];
+        Piece blackKing = board[0][6];
+
         boolean check = false;
 
 
@@ -119,6 +124,16 @@ public class Chess {
                 //opposite
                 check = check(board, isWhiteTurn ? blackKing : whiteKing);
 
+                if(check){
+                    System.out.println("running");
+                    if(checkmate(board, isWhiteTurn ? blackKing : whiteKing)){
+                        System.out.println("CHECKMATE");
+                        System.out.println(isWhiteTurn ? "Black Wins" : "White Wins");
+                        break;
+                    }
+
+                }
+
             }
 
             System.out.println("BlackKing Position File "+blackKing.file+" Rank: "+blackKing.rank);
@@ -163,29 +178,41 @@ public class Chess {
         //["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
         //Write this more efficiently
 
-        board[0][0] = new Rook(false);
-        board[0][7] = new Rook(false);
-        board[0][1] = new Knight(false);
-        board[0][6] = new Knight(false);
-        board[0][2] = new Bishop(false);
-        board[0][5] = new Bishop(false);
-        board[0][3] = new Queen(false);
-        board[0][4] = new King(false);
+//        board[0][0] = new Rook(false);
+//        board[0][7] = new Rook(false);
+//        board[0][1] = new Knight(false);
+//        board[0][6] = new Knight(false);
+//        board[0][2] = new Bishop(false);
+//        board[0][5] = new Bishop(false);
+//        board[0][3] = new Queen(false);
+//        board[0][4] = new King(false);
+//
+//        board[7][0] = new Rook(true);
+//        board[7][7] = new Rook(true);
+//        board[7][1] = new Knight(true);
+//        board[7][6] = new Knight(true);
+//        board[7][2] = new Bishop(true);
+//        board[7][5] = new Bishop(true);
+//        board[7][3] = new Queen(true);
+//        board[7][4] = new King(true);
+//
+//
+//        for(int c = 0; c<(board[0].length); c++){
+//            board[1][c] = new Pawn(false);
+//            board[6][c] = new Pawn(true);
+//        }
 
-        board[7][0] = new Rook(true);
-        board[7][7] = new Rook(true);
-        board[7][1] = new Knight(true);
-        board[7][6] = new Knight(true);
-        board[7][2] = new Bishop(true);
-        board[7][5] = new Bishop(true);
-        board[7][3] = new Queen(true);
-        board[7][4] = new King(true);
-
-
-        for(int c = 0; c<(board[0].length); c++){
-            board[1][c] = new Pawn(false);
-            board[6][c] = new Pawn(true);
-        }
+        //DELETE AFTER CHECKMATE TESTCASE
+        board[0][5] = new Rook(false);
+        board[0][6] = new King(false);
+        board[1][4] = new Queen(false);
+        board[1][5] = new Pawn(false);
+        board[1][7] = new Pawn(false);
+        board[2][3] = new Knight(true);
+        board[2][6] = new Pawn(true);
+        board[7][6] = new Rook(true);
+        board[3][4] = new Bishop(true);
+        board[6][4] = new King(true);
 
     }
 
@@ -237,11 +264,32 @@ public class Chess {
         return false;
     }
 
-    public static boolean checkmate(){
-
+    public static boolean checkmate(Piece[][] board, Piece king){
+        System.out.println("Call for checkmate");
         //every move for the king is false
 
-        return false;
+        for(int r = king.rank-1; r<=king.rank+1; r++){
+            if(r < 0 || r > 7 ){ //skip checking if out of bounds
+                continue;
+            }
+            for(int f = king.file-1; f<=king.file+1; f++){
+
+                if(f < 0 || f > 7){ //skip checking if out of bounds
+                    continue;
+                }
+                if(r == king.rank && f == king.file){ //do not check the king's spot
+                    continue;
+                }
+
+                System.out.println("TRYING TO MOVE KING");
+                if(king.move(board, king.file, king.rank, f, r)){
+                    king.move(board, f, r, king.file, king.rank);
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
 }
