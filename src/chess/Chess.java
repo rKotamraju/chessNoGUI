@@ -21,6 +21,7 @@ public class Chess {
 
         boolean gameOn = true;
         boolean isWhiteTurn = true;
+
         Scanner in = new Scanner(System.in);
         String move;
 
@@ -34,6 +35,7 @@ public class Chess {
 
 
         boolean check = false;
+        boolean prevDraw = false;
 
 
         while(gameOn){ //can change to true actually
@@ -56,19 +58,18 @@ public class Chess {
                 }
                 gameOn = false;
                 break; //-- gameOver;
-            } else if(move.substring(move.lastIndexOf(" ")+1).equals("draw?")){
-                if(isWhiteTurn){
-                    System.out.print("Black's Move: ");
+            }
+            else {
+
+
+                if(prevDraw == true){
+                    if(move.equals("draw")){
+                        gameOn = false;
+                        break; //game over
+                    }
+
+                    prevDraw = false;
                 }
-                else{
-                    System.out.print("White's Move: ");
-                }
-                move = in.nextLine();
-                if(move.equals("draw")){
-                    gameOn = false;
-                    break; //game over
-                }
-            } else {
 
                 //we are using 7 instead of 8 because if getValue returned a 0, we would go out of bounds
                 String[] moves = move.split(" ");
@@ -78,6 +79,10 @@ public class Chess {
                 int nRank = 7-getValue(moves[1].charAt(1));
 
                 Piece newPosition = board[nRank][nFile];
+
+                if(move.substring(move.lastIndexOf(" ")+1).equals("draw?")){
+                    prevDraw = true;
+                }
 
                 if(oFile == -1 || oRank == 8 || nFile == -1 || nRank == 8){ //we set Ranks to 8 bc lines 45 and 47
                     System.out.println("MOVE IS OUT OF BOUNDS");
