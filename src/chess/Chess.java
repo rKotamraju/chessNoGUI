@@ -54,7 +54,7 @@ public class Chess {
                 } else {
                     System.out.println("White Wins");
                 }
-                //gameOn = false;
+                gameOn = false;
                 break; //-- gameOver;
             } else if(move.substring(move.lastIndexOf(" ")+1).equals("draw?")){
                 if(isWhiteTurn){
@@ -65,6 +65,7 @@ public class Chess {
                 }
                 move = in.nextLine();
                 if(move.equals("draw")){
+                    gameOn = false;
                     break; //game over
                 }
             } else {
