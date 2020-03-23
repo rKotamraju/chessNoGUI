@@ -29,12 +29,9 @@ public class Chess {
         setBoard(board);
         printBoard(board);
 
-        //Piece whiteKing = board[7][4];
-        //Piece blackKing = board[0][4];
+        Piece whiteKing = board[7][4];
+        Piece blackKing = board[0][4];
 
-        //DELETE AFTER CHECKMATE TESTCASE
-        Piece whiteKing = board[6][4];
-        Piece blackKing = board[0][6];
 
         boolean check = false;
 
@@ -128,7 +125,7 @@ public class Chess {
                     System.out.println("running");
                     if(checkmate(board, isWhiteTurn ? blackKing : whiteKing)){
                         System.out.println("CHECKMATE");
-                        System.out.println(isWhiteTurn ? "Black Wins" : "White Wins");
+                        System.out.println(isWhiteTurn ? "White Wins" : "Black Wins");
                         break;
                     }
 
@@ -178,41 +175,30 @@ public class Chess {
         //["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
         //Write this more efficiently
 
-//        board[0][0] = new Rook(false);
-//        board[0][7] = new Rook(false);
-//        board[0][1] = new Knight(false);
-//        board[0][6] = new Knight(false);
-//        board[0][2] = new Bishop(false);
-//        board[0][5] = new Bishop(false);
-//        board[0][3] = new Queen(false);
-//        board[0][4] = new King(false);
-//
-//        board[7][0] = new Rook(true);
-//        board[7][7] = new Rook(true);
-//        board[7][1] = new Knight(true);
-//        board[7][6] = new Knight(true);
-//        board[7][2] = new Bishop(true);
-//        board[7][5] = new Bishop(true);
-//        board[7][3] = new Queen(true);
-//        board[7][4] = new King(true);
-//
-//
-//        for(int c = 0; c<(board[0].length); c++){
-//            board[1][c] = new Pawn(false);
-//            board[6][c] = new Pawn(true);
-//        }
+        board[0][0] = new Rook(false);
+        board[0][7] = new Rook(false);
+        board[0][1] = new Knight(false);
+        board[0][6] = new Knight(false);
+        board[0][2] = new Bishop(false);
+        board[0][5] = new Bishop(false);
+        board[0][3] = new Queen(false);
+        board[0][4] = new King(false);
 
-        //DELETE AFTER CHECKMATE TESTCASE
-        board[0][5] = new Rook(false);
-        board[0][6] = new King(false);
-        board[1][4] = new Queen(false);
-        board[1][5] = new Pawn(false);
-        board[1][7] = new Pawn(false);
-        board[2][3] = new Knight(true);
-        board[2][6] = new Pawn(true);
-        board[7][6] = new Rook(true);
-        board[3][4] = new Bishop(true);
-        board[6][4] = new King(true);
+        board[7][0] = new Rook(true);
+        board[7][7] = new Rook(true);
+        board[7][1] = new Knight(true);
+        board[7][6] = new Knight(true);
+        board[7][2] = new Bishop(true);
+        board[7][5] = new Bishop(true);
+        board[7][3] = new Queen(true);
+        board[7][4] = new King(true);
+
+
+        for(int c = 0; c<(board[0].length); c++){
+            board[1][c] = new Pawn(false);
+            board[6][c] = new Pawn(true);
+        }
+
 
     }
 
@@ -246,27 +232,35 @@ public class Chess {
             1. Before -- prevention bc otherwise invalid move
             2. After -- warning to the other player
          */
+
+        Piece temp = board[king.rank][king.file];
+        board[king.rank][king.file] = null;
+
         System.out.println("Starting check");
         for(int r = 0; r<board.length; r++){
             for(int f = 0; f<board[r].length; f++){
                 if((board[r][f] != null)  && (board[r][f].isWhite != king.isWhite)){
-                    if( (board[r][f].move(board, f, r, king.file, king.rank) == true) ){
+                    if((board[r][f].move(board, f, r, king.file, king.rank) == true) ){
                         System.out.println(board[r][f]+" this piece is can kill the king");
                         System.out.println("King's File: "+king.file);
                         System.out.println("King's Rank: "+king.rank);
+                        board[king.rank][king.file] = temp;
                         return true;
                     }
-
                 }
             }
         }
 
+        board[king.rank][king.file] = temp;
         return false;
     }
 
     public static boolean checkmate(Piece[][] board, Piece king){
         System.out.println("Call for checkmate");
         //every move for the king is false
+
+        int ogRank = king.rank;
+        int ogFile = king.file;
 
         for(int r = king.rank-1; r<=king.rank+1; r++){
             if(r < 0 || r > 7 ){ //skip checking if out of bounds
@@ -282,12 +276,25 @@ public class Chess {
                 }
 
                 System.out.println("TRYING TO MOVE KING");
+                System.out.println("File: "+f+" Rank:"+r +" THIS IS THE POSITION BEING CHECKED DURING CHECKMATE");
+                System.out.println("File: "+king.file+" Rank: "+king.rank+" POSITION OF KING BEFORE RESETTING IN CHECKMATE METHOD");
                 if(king.move(board, king.file, king.rank, f, r)){
-                    king.move(board, f, r, king.file, king.rank);
+                    //System.out.println("File: "+king.file+" Rank: "+king.rank+" POSITION OF KING WHEN RETURNING FROM CHECKMATE METHOD");
+                    king.file = ogFile;
+                    king.rank = ogRank;
+                    //king.move(board, r, f, king.file, king.rank);
                     return false;
                 }
             }
         }
+
+        /*
+            f8 -- 5 0
+            h8 -- 7 0
+            f7 -- 5 1
+            g7 -- 6 1
+            h7 -- 7 1
+         */
 
         return true;
     }
