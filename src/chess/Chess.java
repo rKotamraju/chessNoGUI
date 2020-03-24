@@ -83,9 +83,14 @@ public class Chess {
                 }
 
                 if(enpassant == true){
-                   /* if( (nRank == enpassOneRank) && (nFile == enpassOneFile) && (board[oRank][oFile])){
-
-                    }*/
+                   if((nRank == enpassOneRank) && (nFile == enpassOneFile)){
+                        if(board[oRank][nRank].isWhite){ //white
+                            board[nRank-1][nFile] = null;
+                        }
+                        else{
+                            board[nRank+1][nFile] = null;
+                        }
+                    }
 
                     enpassant = false;
                 }
@@ -361,21 +366,21 @@ public class Chess {
 
         if(Math.abs(nRank-oRank) == 2){ //moving two places forward
             if(board[oRank][oFile].isWhite){
-                if((board[oRank-1][oFile +1] instanceof Pawn) && !(board[oRank-1][oFile+1].isWhite) ){
+                if((board[oRank-2][oFile +1] instanceof Pawn) && !(board[oRank-1][oFile+1].isWhite) ){
                     return true;
                 }
 
-                else if((board[oRank-1][oFile-1] instanceof Pawn) && !(board[oRank-1][oFile-1].isWhite)){
+                else if((board[oRank-2][oFile-1] instanceof Pawn) && !(board[oRank-1][oFile-1].isWhite)){
                     return true;
                 }
             }
 
             else{
-                if( (board[oRank+1][oFile+1] instanceof Pawn) && (board[oRank+1][oFile+1].isWhite) ){
+                if( (board[oRank+2][oFile+1] instanceof Pawn) && (board[oRank+1][oFile+1].isWhite) ){
                     return true;
                 }
 
-                else if( (board[oRank+1][oFile-1] instanceof Pawn) && (board[oRank+1][oFile-1].isWhite) ){
+                else if( (board[oRank+2][oFile-1] instanceof Pawn) && (board[oRank+1][oFile-1].isWhite) ){
                     return true;
                 }
             }
