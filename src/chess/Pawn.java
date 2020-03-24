@@ -10,7 +10,6 @@ public class Pawn extends Piece{
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank) {
 
-        //System.out.println("Player is moving a Pawn");
 
         if(oFile == nFile){ //normal move, not killing anyone
                 if(board[nRank][nFile]!=null){
@@ -18,7 +17,6 @@ public class Pawn extends Piece{
                     return false; //trying to move to an occupied space
                 }
 
-                System.out.println("Has made it to checkMove");
                 if(checkMove(board, oFile, oRank, nFile, nRank)){
                     return true;
                 }else{
