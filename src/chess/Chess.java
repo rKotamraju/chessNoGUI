@@ -5,18 +5,6 @@ import java.util.Scanner;
 
 public class Chess {
 
-    /*
-
-        1. have global variables for the kings positions
-        2. use the fields in the king class -- have non-static setKingPosition method
-        3. Have whiteKing and blackKing as local variables in main method
-
-        int wKRank
-        int wKFile
-
-        int bKRank
-        int
-     */
     public static void main(String[] args) {
 
         boolean gameOn = true;
