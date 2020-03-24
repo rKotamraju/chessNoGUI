@@ -65,6 +65,7 @@ public class Chess {
                 if(prevDraw == true){
                     if(move.equals("draw")){
                         gameOn = false;
+                        System.out.println("draw");
                         break; //game over
                     }
 
@@ -92,6 +93,13 @@ public class Chess {
                 if(board[oRank][oFile] != null && (isWhiteTurn == board[oRank][oFile].isWhite)) {
                     // System.out.println("Moving from " + oFile + " " + oRank + " to " + nFile + " " + nRank);
                     if(board[oRank][oFile].move(board, oFile, oRank, nFile, nRank) == true){
+                        //checking for pawn promotion
+                        if(checkPawnPromotion(board, oRank, oFile, nRank, nFile) == true){
+                            System.out.println("CHECK PAWN PROMOTION IS TRUE");
+                            promotePawn(board, move.charAt(move.length()-1), oRank, oFile, nRank, nFile);
+
+                        }
+
                         System.out.println(board[oRank][oFile]);
 
                         board[nRank][nFile] = board[oRank][oFile];
@@ -294,15 +302,52 @@ public class Chess {
             }
         }
 
-        /*
-            f8 -- 5 0
-            h8 -- 7 0
-            f7 -- 5 1
-            g7 -- 6 1
-            h7 -- 7 1
-         */
-
         return true;
+    }
+
+    public static boolean checkPawnPromotion(Piece[][] board, int oRank, int oFile, int nRank, int nFile){
+        if(!(board[oRank][oFile] instanceof Pawn)){ //has to be a pawn
+            System.out.println("NOT AN INSTANCE OF PAWN");
+            return false;
+        }
+
+        if((board[oRank][oFile].isWhite) && (nRank != 0)){
+            System.out.println("NOT ON RIGHT SIDE OF BOARD White,nRank: " + nRank);
+            return false;
+        }
+        else if(!(board[oRank][oFile].isWhite) && (nRank != 7)){
+            System.out.println("NOT ON RIGHT SIDE OF BOARD BLACK");
+            return false;
+        }
+        return true;
+    }
+
+    public static void promotePawn(Piece[][] board, char promotion, int oRank, int oFile, int nRank, int nFile){
+        boolean white = board[oRank][oFile].isWhite;
+        if(promotion == 'K'){
+            board[oRank][oFile] = new King(white);
+        }
+        else if(promotion == 'Q'){
+            board[oRank][oFile] = new Queen(white);
+        }
+        else if(promotion == 'N'){
+            board[oRank][oFile] = new Knight(white);
+        }
+        else if(promotion == 'B'){
+            board[oRank][oFile] = new Bishop(white);
+
+        }
+        else if(promotion == 'R'){
+            board[oRank][oFile] = new Rook(white);
+        }
+        else if(promotion == 'P'){
+            board[oRank][oFile] = new Pawn(white);
+
+        }
+        else{ //not specified
+            board[oRank][oFile] = new Queen(white);
+        }
+
     }
 
 }
