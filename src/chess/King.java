@@ -18,6 +18,13 @@ public class King extends Queen{
         int fdist = Math.abs(oFile - nFile);
         int rdist = Math.abs(oRank - nRank);
 
+        //insert castling right here
+        /**
+         * check hasMoved, check nRank of the kings and make sure its 7 or 0, check that rank is not changing
+         */
+
+
+
         if(fdist > 1 || rdist > 1){
             System.out.println("King can only move one space");
             return false;
