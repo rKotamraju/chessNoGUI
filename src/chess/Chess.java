@@ -25,6 +25,10 @@ public class Chess {
         boolean check = false;
         boolean prevDraw = false;
 
+        boolean enpassant = false;
+        int enpassOneRank  = -10;
+        int enpassOneFile = -10;
+
 
         while(gameOn){ //can change to true actually
             if(check){
@@ -78,6 +82,19 @@ public class Chess {
                     continue;
                 }
 
+                if(enpassant == true){
+                   if((nRank == enpassOneRank) && (nFile == enpassOneFile)){
+                        if(board[oRank][nRank].isWhite){ //white
+                            board[nRank-1][nFile] = null;
+                        }
+                        else{
+                            board[nRank+1][nFile] = null;
+                        }
+                    }
+
+                    enpassant = false;
+                }
+
                 if(board[oRank][oFile] != null && (isWhiteTurn == board[oRank][oFile].isWhite)) {
                     // System.out.println("Moving from " + oFile + " " + oRank + " to " + nFile + " " + nRank);
                     if(board[oRank][oFile].move(board, oFile, oRank, nFile, nRank) == true){
@@ -86,6 +103,13 @@ public class Chess {
                         if(checkPawnPromotion(board, oRank, oFile, nRank, nFile) == true){
                             System.out.println("CHECK PAWN PROMOTION IS TRUE");
                             promotePawn(board, move.charAt(move.length()-1), oRank, oFile, nRank, nFile);
+
+                        }
+
+                        if(enpassant(board, oRank, oFile, nRank, nFile) == true){
+                            enpassant = true;
+                            enpassOneFile = oFile;
+                            enpassOneRank = board[oRank][oFile].isWhite ? oRank-1 : oRank +1;
 
                         }
 
@@ -330,6 +354,38 @@ public class Chess {
             board[oRank][oFile] = new Queen(white);
         }
 
+    }
+
+    public static boolean enpassant(Piece[][] board, int oRank, int oFile, int nRank, int nFile){
+
+        /*
+        If true, pawn will still move two spaces
+        if on next turn, other pawn moves to one space ahead of other pawn's old space
+        other pawn dies
+         */
+
+        if(Math.abs(nRank-oRank) == 2){ //moving two places forward
+            if(board[oRank][oFile].isWhite){
+                if((board[oRank-2][oFile +1] instanceof Pawn) && !(board[oRank-1][oFile+1].isWhite) ){
+                    return true;
+                }
+
+                else if((board[oRank-2][oFile-1] instanceof Pawn) && !(board[oRank-1][oFile-1].isWhite)){
+                    return true;
+                }
+            }
+
+            else{
+                if( (board[oRank+2][oFile+1] instanceof Pawn) && (board[oRank+1][oFile+1].isWhite) ){
+                    return true;
+                }
+
+                else if( (board[oRank+2][oFile-1] instanceof Pawn) && (board[oRank+1][oFile-1].isWhite) ){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
