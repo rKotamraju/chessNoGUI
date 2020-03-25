@@ -10,6 +10,16 @@ public class Knight extends Piece{
         this.name = isWhite ? "wN" : "bN";
     }
 
+    /**
+     * Implements functionality of the knight - makes sure does not kill same color
+     * @param board 2D array of chess board
+     * @param oFile file of the piece to be moved
+     * @param oRank rank of the piece to be moved
+     * @param nFile file the piece is going to move to
+     * @param nRank rank the piece is going to move to
+     * @return true if valid move, false otherwise
+     */
+
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank) {
         //System.out.println("Player is moving a"+name);

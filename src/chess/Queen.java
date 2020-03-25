@@ -10,6 +10,16 @@ public class Queen extends Piece{
         this.name = isWhite ? "wQ" : "bQ";
     }
 
+    /**
+     * Implements the move functionality of the Queen - any number of spaces in any direction
+     * @param board 2D array containing chess board
+     * @param oFile file of piece to be moved
+     * @param oRank rank of piece to be moved
+     * @param nFile file the piece is moving to
+     * @param nRank rank the piece is moving to
+     * @return true if valid move, false otherwise
+     */
+
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
         System.out.println("Player is moving a "+name);
@@ -21,6 +31,16 @@ public class Queen extends Piece{
         }
 
     }
+
+    /**
+     * Implements moving straight functionality of the queen which is also used for the rook
+     * @param board
+     * @param oFile
+     * @param oRank
+     * @param nFile
+     * @param nRank
+     * @return
+     */
 
     public boolean moveStraight(Piece[][] board, int oFile, int oRank, int nFile, int nRank){
         if((oFile == nFile) ^ (oRank == nRank)){ //Logical XOR, Either Files have to be the same or Ranks have to be the but not both
@@ -64,6 +84,16 @@ public class Queen extends Piece{
 
         return false;
     }
+
+    /**
+     * Implements moving diagonal functionality of the queen which is also used for the bishop
+     * @param board
+     * @param oFile
+     * @param oRank
+     * @param nFile
+     * @param nRank
+     * @return
+     */
 
     public boolean moveDiagonally(Piece[][] board, int oFile, int oRank, int nFile, int nRank){
         if((nFile != oFile) && (nRank != oRank)) {

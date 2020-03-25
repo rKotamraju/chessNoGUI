@@ -15,6 +15,18 @@ public class King extends Queen{
         this.name = isWhite ? "wK" : "bK";
     }
 
+    /**
+     * Implements the functionality of the king - one move in any direction
+     * Extends queen class which has same functionality as king but any number of moves
+     * Also takes care of castling
+     * @param board 2D array containing chess board
+     * @param oFile file of the piece to be moved
+     * @param oRank rank of the piece to be moved
+     * @param nFile file where the piece is going to move
+     * @param nRank rank where the piece is going to move
+     * @return boolean, true if the move is valid, otherwise false
+     */
+
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
         //(oFile: 6, oRank: 0, nFile: 5, nRank: 1)
@@ -88,6 +100,13 @@ public class King extends Queen{
         return false;
 
     }
+
+    /**
+     * Sets the kings position when moved
+     * @param rank new rank of king
+     * @param file new file of king
+     *
+     */
 
     public boolean setKingPosition(int rank, int file){
         this.file = file;

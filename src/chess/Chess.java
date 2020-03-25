@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Chess {
 
     /**
-     * Keeps track of the last piece that was moved - useful for enpassant
+     * @lastMove Keeps track of the last piece that was moved - useful for enpassant
+     * @whiteKing Global variable storing position of white king
+     * @blackKing Global variable storing position of black king
      */
     static Piece lastMove;
     private static Piece whiteKing;
@@ -174,12 +176,12 @@ public class Chess {
 
     /**
      * Reverses a move previously made by using a temporary position
-     * @param board
-     * @param oFile
-     * @param oRank
-     * @param nFile
-     * @param nRank
-     * @param newPosition
+     * @param board 2D array containing the chess board
+     * @param oFile file you are moving the piece back to
+     * @param oRank rank you are moving the piece back to
+     * @param nFile file of piece you are moving
+     * @param nRank rank of piece you are moving
+     * @param newPosition old piece you killed and brought back
      *
      */
     public static void reverseMove(Piece[][] board, int oFile, int oRank, int nFile, int nRank, Piece newPosition){
@@ -191,7 +193,7 @@ public class Chess {
 
     /**
      * Creates a hashmap of values that map the ranks and files of the board to the 2D array which contains the board
-     * @param c
+     * @param c char to get value of
      *
      */
     public static int getValue(char c){
@@ -215,7 +217,7 @@ public class Chess {
 
     /**
      * Sets up the starting board for chess by specifying the location of each piece in the beginning
-     * @param board
+     * @param board 2D array containing the chess board
      */
     public static void setBoard(Piece[][] board){
 
@@ -251,7 +253,7 @@ public class Chess {
 
     /**
      * Prints the chess board using ascii values, puts '##' on black squares and leaves white squares empty
-     * @param board
+     * @param board 2D array containing the chess board
      */
 
     public static void printBoard(Piece[][] board){
@@ -280,8 +282,8 @@ public class Chess {
 
     /**
      * Checks if specified king is in check by any other opposite color piece
-     * @param board
-     * @param king
+     * @param board 2D array of chess board
+     * @param king king you are checking is or is not in check (black or white)
      * @return boolean, true if king is in check, false otherwise
      */
 
@@ -324,8 +326,8 @@ public class Chess {
 
     /**
      * Checks whether the specified King is in checkmate
-     * @param board
-     * @param king
+     * @param board 2D array of the chess board
+     * @param king king you are checking is or is not in checkmate (black or white)
      * @return boolean, true if the king is in checkmate, false otherwise
      */
 
@@ -367,12 +369,12 @@ public class Chess {
 
     /**
      * Determines whether it is permissible for the pawn to be promoted
-     * Checks whether it has reached the opposite end
-     * @param board
-     * @param oRank
-     * @param oFile
-     * @param nRank
-     * @param nFile
+     * Checks whether it has reached the opposite end and whether it is a pawn
+     * @param board 2D array of the chess board
+     * @param oRank old rank of the piece to be moved
+     * @param oFile old file of the piece to be moved
+     * @param nRank new rank that you are moving the piece to
+     * @param nFile new file that you are moving the piece to
      * @return boolean, true if pawn promotion is valid, false otherwise
      */
     public static boolean checkPawnPromotion(Piece[][] board, int oRank, int oFile, int nRank, int nFile){
@@ -392,12 +394,12 @@ public class Chess {
     /**
      * Determines what piece a pawn should be promoted to based on the player input
      *
-     * @param board
-     * @param promotion
-     * @param oRank
-     * @param oFile
-     * @param nRank
-     * @param nFile
+     * @param board 2D array of the chess board
+     * @param promotion char indicating the piece the player wants to promote the pawn to
+     * @param oRank old rank of the piece you are promoting
+     * @param oFile old file of the piece you are promoting
+     * @param nRank new rank that you are moving the piece to
+     * @param nFile new file that you are moving the piece to
      *
      * @return void
      */
@@ -422,6 +424,12 @@ public class Chess {
         }
 
     }
+
+    /**
+     * Used for the enpassant method to check that a enpassant move is not leaving the same color king in check
+     * @param isWhite boolean which tells if a piece is white or black
+     * @return a white or black king
+     */
 
     public static Piece returnKing(boolean isWhite){
 

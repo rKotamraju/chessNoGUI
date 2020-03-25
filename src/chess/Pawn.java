@@ -11,6 +11,18 @@ public class Pawn extends Piece{
         this.name = isWhite ? "wp" : "bp";
     }
 
+    /**
+     * Implements the move functionality of the Pawn Piece
+     * Takes care of killing diagonally - makes sure there is something to kill and that it is the opposite color
+     * Takes care of moving forward one or two spots by called checkMove method
+     * Takes care of enpassant by storing a piece which tracks which piece was moved last
+     * @param board 2D array containing the chess board
+     * @param oFile old file of the piece to be moved
+     * @param oRank old rank of the piece to be moved
+     * @param nFile new file of where the piece is going to move
+     * @param nRank new rank of where the piece is going to move
+     * @return boolean, true if move is valid, false otherwise
+     */
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank) {
 
@@ -92,12 +104,13 @@ public class Pawn extends Piece{
 
     /**
      * Method which checks if the pawn is moving one or two spaces forward
-     * If the pawn if moving 2 spaces forward, checks that
-     * @param board
-     * @param oFile
-     * @param oRank
-     * @param nFile
-     * @param nRank
+     * If the pawn if moving 2 spaces forward, checks that the pawn is not jumping over anything
+     * Also checks that it is the first move of the pawn since that is the only time you can move two spaces
+     * @param board 2D array containing the chess board
+     * @param oFile old file of the piece you want to move
+     * @param oRank old rank of the piece you want to move
+     * @param nFile new file you want to move the piece to
+     * @param nRank new rank you want to move the piece to
      * @return boolean, true if move is valid
      */
     public boolean checkMove (Piece[][] board, int oFile, int oRank, int nFile, int nRank){
