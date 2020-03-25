@@ -132,6 +132,7 @@ public class Chess {
                     //printBoard(board);
                     System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
                     reverseMove(board, oFile, oRank, nFile, nRank, newPosition);
+                    lastMove = board[oRank][oFile];
                     //we don't have to update the king's position here because we don't allow the king to put itself in check
                     continue;
                 }
