@@ -12,7 +12,7 @@ public class Queen extends Piece{
 
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
-        //System.out.println("Player is moving a "+name);
+        System.out.println("Player is moving a "+name);
 
         if(moveStraight(board, oFile, oRank, nFile, nRank)){
             return true;
@@ -34,6 +34,7 @@ public class Queen extends Piece{
                 for(int i = minRank+1; i< maxRank; i++){ //plus one bc we do not want to check the spot of the rook
                     if (board[i][oFile] != null) {
                         System.out.println("Something in the way: "+oFile+","+i);
+                        System.out.println(board[i][oFile]);
                         return false;
                     }
                 }

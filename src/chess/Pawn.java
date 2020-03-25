@@ -45,6 +45,21 @@ public class Pawn extends Piece{
                         return false;
                     }
 
+                    //simulating enpassant to get ready to see if it will result in a check
+                    Piece king = Chess.returnKing(this.isWhite);
+                    board[nRank][nFile] = this;
+                    board[oRank][oFile] = null;
+                    int tempRank = this.isWhite ? necessaryRank+1 : necessaryRank-1;
+                    board[tempRank][nFile] = null;
+                    //System.out.println("Right before king enpassant");
+
+                    if(Chess.check(board, king)){ //this is returning false when it should be returning true
+                        System.out.println(king+"This is the king enpassant");
+                        Chess.reverseMove(board, oFile, oRank, nFile, nRank, null);
+                        board[tempRank][nFile] = pawn;
+                        return false;
+                    }
+
                     int enpassantRank = this.isWhite ? nRank+1 : nRank-1;
                     board[enpassantRank][nFile] = null;
 
