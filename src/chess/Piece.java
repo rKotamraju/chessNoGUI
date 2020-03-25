@@ -1,3 +1,6 @@
+/**
+ * @author Sujit Molleti and Rachana Kotamraju
+ */
 package chess;
 
 public abstract class Piece {

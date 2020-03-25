@@ -1,3 +1,6 @@
+/**
+ * @author Sujit Molleti and Rachana Kotamraju
+ */
 package chess;
 
 import java.util.HashMap;
@@ -5,6 +8,9 @@ import java.util.Scanner;
 
 public class Chess {
 
+    /**
+     * Keeps track of the last piece that was moved - useful for enpassant
+     */
     static Piece lastMove;
 
     public static void main(String[] args) {
@@ -89,7 +95,7 @@ public class Chess {
 
                         //checking for pawn promotion
                         if(checkPawnPromotion(board, oRank, oFile, nRank, nFile) == true){
-                            System.out.println("CHECK PAWN PROMOTION IS TRUE");
+                            //System.out.println("CHECK PAWN PROMOTION IS TRUE");
                             promotePawn(board, move.charAt(move.length()-1), oRank, oFile, nRank, nFile);
 
                         }
@@ -107,6 +113,7 @@ public class Chess {
                             }
                         }
 
+                        System.out.println("Updating last move");
                         lastMove = board[nRank][nFile];
 
                     }else{
@@ -115,7 +122,7 @@ public class Chess {
                         continue; // this should act as a redo
                     }
                 } else {
-                    System.out.println("WE ARE ON LINE 104");
+                    //System.out.println("WE ARE ON LINE 104");
                     System.out.println("MOVE IS INVALID");
                     continue;
                 }
@@ -156,6 +163,16 @@ public class Chess {
 
     } //end of the main
 
+    /**
+     * Reverses a move previously made by using a temporary position
+     * @param board
+     * @param oFile
+     * @param oRank
+     * @param nFile
+     * @param nRank
+     * @param newPosition
+     *
+     */
     public static void reverseMove(Piece[][] board, int oFile, int oRank, int nFile, int nRank, Piece newPosition){
         System.out.println("Reversing move "+board[nRank][nFile]);
         board[oRank][oFile] = board[nRank][nFile];
@@ -163,6 +180,11 @@ public class Chess {
 
     }
 
+    /**
+     * Creates a hashmap of values that map the ranks and files of the board to the 2D array which contains the board
+     * @param c
+     *
+     */
     public static int getValue(char c){
         HashMap<Character, Integer> hashmap = new HashMap<Character, Integer>();
 
@@ -182,6 +204,10 @@ public class Chess {
         }
     }
 
+    /**
+     * Sets up the starting board for chess by specifying the location of each piece in the beginning
+     * @param board
+     */
     public static void setBoard(Piece[][] board){
 
         //["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
@@ -214,6 +240,11 @@ public class Chess {
 
     }
 
+    /**
+     * Prints the chess board using ascii values, puts '##' on black squares and leaves white squares empty
+     * @param board
+     */
+
     public static void printBoard(Piece[][] board){
         for(int r = 0; r<board.length; r++){
             for(int c = 0; c<board[r].length; c++){
@@ -238,6 +269,13 @@ public class Chess {
 
     }
 
+    /**
+     * Checks if specified king is in check by any other opposite color piece
+     * @param board
+     * @param king
+     * @return boolean, true if king is in check, false otherwise
+     */
+
     public static boolean check(Piece[][] board, Piece king){
         //alt. make it a int method 1 white is on check, -1 black is on check, 0 neither are on check
         /*
@@ -253,7 +291,13 @@ public class Chess {
             for(int f = 0; f<board[r].length; f++){
                 if((board[r][f] != null)  && (board[r][f].isWhite != king.isWhite)){
                     if((board[r][f].move(board, f, r, king.file, king.rank) == true) ){
-                        System.out.println(board[r][f]+" this piece is can kill the king");
+                        if(board[r][f] instanceof Pawn){
+                            if(king.file == f){
+                                board[king.rank][king.file] = temp;
+                                return false;
+                            }
+                        }
+                        System.out.println(board[r][f]+" this piece can kill the king");
                         System.out.println("King's File: "+king.file);
                         System.out.println("King's Rank: "+king.rank);
                         board[king.rank][king.file] = temp;
@@ -267,8 +311,15 @@ public class Chess {
         return false;
     }
 
+    /**
+     * Checks whether the specified King is in checkmate
+     * @param board
+     * @param king
+     * @return boolean, true if the king is in checkmate, false otherwise
+     */
+
     public static boolean checkmate(Piece[][] board, Piece king){
-        System.out.println("Call for checkmate");
+        //System.out.println("Call for checkmate");
         //every move for the king is false
 
         int ogRank = king.rank;
@@ -287,9 +338,9 @@ public class Chess {
                     continue;
                 }
 
-                System.out.println("TRYING TO MOVE KING");
-                System.out.println("File: "+f+" Rank:"+r +" THIS IS THE POSITION BEING CHECKED DURING CHECKMATE");
-                System.out.println("File: "+king.file+" Rank: "+king.rank+" POSITION OF KING BEFORE RESETTING IN CHECKMATE METHOD");
+              //  System.out.println("TRYING TO MOVE KING");
+             //   System.out.println("File: "+f+" Rank:"+r +" THIS IS THE POSITION BEING CHECKED DURING CHECKMATE");
+             //   System.out.println("File: "+king.file+" Rank: "+king.rank+" POSITION OF KING BEFORE RESETTING IN CHECKMATE METHOD");
                 if(king.move(board, king.file, king.rank, f, r)){
                     //System.out.println("File: "+king.file+" Rank: "+king.rank+" POSITION OF KING WHEN RETURNING FROM CHECKMATE METHOD");
                     king.file = ogFile;
@@ -303,22 +354,42 @@ public class Chess {
         return true;
     }
 
+    /**
+     * Determines whether it is permissible for the pawn to be promoted
+     * Checks whether it has reached the opposite end
+     * @param board
+     * @param oRank
+     * @param oFile
+     * @param nRank
+     * @param nFile
+     * @return boolean, true if pawn promotion is valid, false otherwise
+     */
     public static boolean checkPawnPromotion(Piece[][] board, int oRank, int oFile, int nRank, int nFile){
         if(!(board[oRank][oFile] instanceof Pawn)){ //has to be a pawn
-            System.out.println("NOT AN INSTANCE OF PAWN");
             return false;
         }
 
         if((board[oRank][oFile].isWhite) && (nRank != 0)){
-            System.out.println("NOT ON RIGHT SIDE OF BOARD White,nRank: " + nRank);
             return false;
         }
         else if(!(board[oRank][oFile].isWhite) && (nRank != 7)){
-            System.out.println("NOT ON RIGHT SIDE OF BOARD BLACK");
             return false;
         }
         return true;
     }
+
+    /**
+     * Determines what piece a pawn should be promoted to based on the player input
+     *
+     * @param board
+     * @param promotion
+     * @param oRank
+     * @param oFile
+     * @param nRank
+     * @param nFile
+     *
+     * @return void
+     */
 
     public static void promotePawn(Piece[][] board, char promotion, int oRank, int oFile, int nRank, int nFile){
         boolean white = board[oRank][oFile].isWhite;

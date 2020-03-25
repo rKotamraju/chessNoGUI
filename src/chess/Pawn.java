@@ -1,3 +1,6 @@
+/**
+ * @author Sujit Molleti and Rachana Kotamraju
+ */
 package chess;
 
 public class Pawn extends Piece{
@@ -50,7 +53,7 @@ public class Pawn extends Piece{
                 else{
                     System.out.println("Cannot kill nothing!");
                     return false;
-                }
+               }
 
             }
             //check that you are killing opposite color
@@ -72,6 +75,16 @@ public class Pawn extends Piece{
         }
     }
 
+    /**
+     * Method which checks if the pawn is moving one or two spaces forward
+     * If the pawn if moving 2 spaces forward, checks that
+     * @param board
+     * @param oFile
+     * @param oRank
+     * @param nFile
+     * @param nRank
+     * @return boolean, true if move is valid
+     */
     public boolean checkMove (Piece[][] board, int oFile, int oRank, int nFile, int nRank){
         if(isWhite){
             //check if one space
