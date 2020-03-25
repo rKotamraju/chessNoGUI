@@ -44,13 +44,13 @@ public class Chess {
 
         while(gameOn){ //can change to true actually
             if(check){
-                System.out.println("Check");
+                System.out.println("\nCheck");
             }
             if(isWhiteTurn){
-                System.out.print("White's Move: ");
+                System.out.print("\nWhite's Move: ");
                 move = in.nextLine();
             } else{
-                System.out.print("Black's Move: ");
+                System.out.print("\nBlack's Move: ");
                 move = in.nextLine();
             }
 
@@ -152,7 +152,7 @@ public class Chess {
                 if(check){
                    // System.out.println("running");
                     if(checkmate(board, isWhiteTurn ? blackKing : whiteKing)){
-                        System.out.println("Checkmate");
+                        System.out.println("\nCheckmate");
                         System.out.println(isWhiteTurn ? "\nWhite Wins" : "\nBlack Wins");
                         break;
                     }
@@ -277,7 +277,7 @@ public class Chess {
         for(int i = 0; i<8; i++){
             System.out.print(" "+(char)(97+i)+" ");
         }
-        System.out.println("\n");
+        System.out.println();
 
     }
 
