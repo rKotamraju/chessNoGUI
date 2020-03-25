@@ -2,6 +2,7 @@ package chess;
 
 public class Pawn extends Piece{
 
+
     public Pawn(boolean isWhite){
         this.isWhite = isWhite;
         this.name = isWhite ? "wp" : "bp";
@@ -27,16 +28,25 @@ public class Pawn extends Piece{
         else{ //killing, moving diagonal
             if(board[nRank][nFile] == null){
 
-                Piece pawn = this.isWhite ? board[nRank+1][nFile] : board[nRank-1][nFile];
-                if(pawn.isWhite == this.isWhite){
+                int necessaryRank =  isWhite ? 2 : 5;
+
+                if(nRank != necessaryRank){
                     return false;
                 }
 
-                //enpassant
-                if(){
+                Piece pawn = this.isWhite ? board[nRank+1][nFile] : board[nRank-1][nFile];
 
+                //enpassant
+                if(pawn  == Chess.lastMove){
+                    if(!checkMove(board, oFile, oRank, nFile, nRank)){
+                        return false;
+                    }
+
+                    int enpassantRank = this.isWhite ? nRank+1 : nRank-1;
+                    board[enpassantRank][nFile] = null;
+
+                    return true;
                 }
-                
                 else{
                     System.out.println("Cannot kill nothing!");
                     return false;
