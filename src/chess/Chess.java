@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class Chess {
 
+    static Piece lastMove;
+
     public static void main(String[] args) {
 
         boolean gameOn = true;
@@ -105,6 +107,8 @@ public class Chess {
                             }
                         }
 
+                        lastMove = board[nRank][nFile];
+
                     }else{
 
                         System.out.println("MOVE IS INVALID");
@@ -146,6 +150,7 @@ public class Chess {
             //end turn code
             System.out.println();
             printBoard(board);
+
             isWhiteTurn = !(isWhiteTurn);
         }
 
@@ -335,7 +340,6 @@ public class Chess {
         }
 
     }
-
 
 
 }

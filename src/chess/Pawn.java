@@ -26,8 +26,22 @@ public class Pawn extends Piece{
 
         else{ //killing, moving diagonal
             if(board[nRank][nFile] == null){
-                System.out.println("Cannot kill nothing!");
-                return false;
+
+                Piece pawn = this.isWhite ? board[nRank+1][nFile] : board[nRank-1][nFile];
+                if(pawn.isWhite == this.isWhite){
+                    return false;
+                }
+
+                //enpassant
+                if(){
+
+                }
+                
+                else{
+                    System.out.println("Cannot kill nothing!");
+                    return false;
+                }
+
             }
             //check that you are killing opposite color
             if((isWhite && board[nRank][nFile].isWhite) || ((!isWhite) && !(board[nRank][nFile].isWhite))){
