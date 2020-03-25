@@ -56,9 +56,9 @@ public class Chess {
 
             if(move.equals("resign")){
                 if(isWhiteTurn){
-                    System.out.println("Black Wins");
+                    System.out.println("\nBlack Wins");
                 } else {
-                    System.out.println("White Wins");
+                    System.out.println("\nWhite Wins");
                 }
                 gameOn = false;
                 break; //-- gameOver;
@@ -69,7 +69,7 @@ public class Chess {
                 if(prevDraw == true){
                     if(move.equals("draw")){
                         gameOn = false;
-                        System.out.println("draw");
+                        System.out.println("\ndraw");
                         break; //game over
                     }
 
@@ -153,7 +153,7 @@ public class Chess {
                    // System.out.println("running");
                     if(checkmate(board, isWhiteTurn ? blackKing : whiteKing)){
                         System.out.println("Checkmate");
-                        System.out.println(isWhiteTurn ? "White Wins" : "Black Wins");
+                        System.out.println(isWhiteTurn ? "\nWhite Wins" : "\nBlack Wins");
                         break;
                     }
 
