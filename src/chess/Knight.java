@@ -28,10 +28,10 @@ public class Knight extends Piece{
         if((Math.abs(oFile-nFile)+Math.abs(oRank-nRank) == 3) && (oFile != nFile && oRank != nRank)){
             if (board[nRank][nFile] != null) {
                 if (board[oRank][oFile].isWhite == board[nRank][nFile].isWhite) {
-                    System.out.println("Don't kill ur friend");
+                  //  System.out.println("Don't kill ur friend");
                     return false;
                 } else {
-                    System.out.println("Slayed");
+                 //   System.out.println("Slayed");
                     return true;
                 }
             }

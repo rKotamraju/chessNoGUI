@@ -60,7 +60,7 @@ public class King extends Queen{
             while (i != 1 && i != 6){
                 i = nFile > 4 ? ++i : --i;
 
-                System.out.println("Castling: "+i);
+               // System.out.println("Castling: "+i);
 
                 if(board[oRank][i] != null){
                     return false;
@@ -69,7 +69,7 @@ public class King extends Queen{
             }
             //castle approved
 
-            System.out.println("Castling");
+          //  System.out.println("Castling");
 
             int oldrookFile = nFile > 4 ? 7 : 0;
             int newrookFile = nFile > 4 ? 5 : 3;
@@ -84,14 +84,14 @@ public class King extends Queen{
 
 
         if(fdist > 1 || rdist > 1){
-            System.out.println("King can only move one space");
+          //  System.out.println("King can only move one space");
             return false;
         }
 
         setKingPosition(nRank, nFile);
 
         if(super.move(board, oFile, oRank, nFile, nRank) && (Chess.check(board, this)==false)){
-            System.out.println("Updating King's position");
+           // System.out.println("Updating King's position");
             this.hasMoved = true;
             return true;
         }

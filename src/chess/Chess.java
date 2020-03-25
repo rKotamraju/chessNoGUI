@@ -44,7 +44,7 @@ public class Chess {
 
         while(gameOn){ //can change to true actually
             if(check){
-                System.out.println("CHECK");
+                System.out.println("Check");
             }
             if(isWhiteTurn){
                 System.out.print("White's Move: ");
@@ -90,7 +90,8 @@ public class Chess {
                 }
 
                 if(oFile == -1 || oRank == 8 || nFile == -1 || nRank == 8){ //we set Ranks to 8 bc lines 45 and 47
-                    System.out.println("MOVE IS OUT OF BOUNDS");
+                    //System.out.println("MOVE IS OUT OF BOUNDS");
+                    System.out.println("Illegal move, try again");
                     continue;
                 }
 
@@ -108,7 +109,7 @@ public class Chess {
 
                         }
 
-                        System.out.println(board[oRank][oFile]+"hello");
+                      // System.out.println(board[oRank][oFile]);
 
                         board[nRank][nFile] = board[oRank][oFile];
                         board[oRank][oFile] = null;
@@ -126,19 +127,19 @@ public class Chess {
 
                     }else{
 
-                        System.out.println("MOVE IS INVALID");
+                        System.out.println("Illegal move, try again.");
                         continue; // this should act as a redo
                     }
                 } else {
                     //System.out.println("WE ARE ON LINE 104");
-                    System.out.println("MOVE IS INVALID");
+                    System.out.println("Illegal move, try again.");
                     continue;
                 }
 
                 //invalid
                 if(check(board, isWhiteTurn ? whiteKing : blackKing)){
                     //printBoard(board);
-                    System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
+                    //System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
                     reverseMove(board, oFile, oRank, nFile, nRank, newPosition);
                     lastMove = board[oRank][oFile];
                     //we don't have to update the king's position here because we don't allow the king to put itself in check
@@ -149,9 +150,9 @@ public class Chess {
                 check = check(board, isWhiteTurn ? blackKing : whiteKing);
 
                 if(check){
-                    System.out.println("running");
+                   // System.out.println("running");
                     if(checkmate(board, isWhiteTurn ? blackKing : whiteKing)){
-                        System.out.println("CHECKMATE");
+                        System.out.println("Checkmate");
                         System.out.println(isWhiteTurn ? "White Wins" : "Black Wins");
                         break;
                     }
@@ -160,11 +161,11 @@ public class Chess {
 
             }
 
-            System.out.println("BlackKing Position File "+blackKing.file+" Rank: "+blackKing.rank);
-            System.out.println("WhiteKing Position File "+whiteKing.file+" Rank: "+whiteKing.rank);
+           // System.out.println("BlackKing Position File "+blackKing.file+" Rank: "+blackKing.rank);
+          //  System.out.println("WhiteKing Position File "+whiteKing.file+" Rank: "+whiteKing.rank);
 
             //end turn code
-            System.out.println("Updating last moved piece");
+           // System.out.println("Updating last moved piece");
             lastMove = board[nRank][nFile];
             System.out.println();
             printBoard(board);
@@ -185,7 +186,7 @@ public class Chess {
      *
      */
     public static void reverseMove(Piece[][] board, int oFile, int oRank, int nFile, int nRank, Piece newPosition){
-        System.out.println("Reversing move "+board[nRank][nFile]);
+       // System.out.println("Reversing move "+board[nRank][nFile]);
         board[oRank][oFile] = board[nRank][nFile];
         board[nRank][nFile] = newPosition;
 
@@ -297,9 +298,9 @@ public class Chess {
         Piece temp = board[king.rank][king.file];
         board[king.rank][king.file] = null;
 
-        System.out.println(board[3][4]);
+      //  System.out.println(board[3][4]);
 
-        System.out.println("Starting check");
+       // System.out.println("Starting check");
         for(int r = 0; r<board.length; r++){
             for(int f = 0; f<board[r].length; f++){
                 if((board[r][f] != null)  && (board[r][f].isWhite != king.isWhite)){
@@ -310,9 +311,9 @@ public class Chess {
                                 return false;
                             }
                         }
-                        System.out.println(board[r][f]+" this piece can kill the king");
-                        System.out.println("King's File: "+king.file);
-                        System.out.println("King's Rank: "+king.rank);
+                      //  System.out.println(board[r][f]+" this piece can kill the king");
+                      //  System.out.println("King's File: "+king.file);
+                       // System.out.println("King's Rank: "+king.rank);
                         board[king.rank][king.file] = temp;
                         return true; //this is being callled but from where?
                     }

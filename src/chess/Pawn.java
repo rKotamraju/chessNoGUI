@@ -29,7 +29,7 @@ public class Pawn extends Piece{
 
         if(oFile == nFile){ //normal move, not killing anyone
                 if(board[nRank][nFile]!=null){
-                    System.out.println("Cant move to a taken spot!");
+                   // System.out.println("Cant move to a taken spot!");
                     return false; //trying to move to an occupied space
                 }
 
@@ -66,7 +66,7 @@ public class Pawn extends Piece{
                     //System.out.println("Right before king enpassant");
 
                     if(Chess.check(board, king)){ //this is returning false when it should be returning true
-                        System.out.println(king+"This is the king enpassant");
+                       // System.out.println(king+"This is the king enpassant");
                         Chess.reverseMove(board, oFile, oRank, nFile, nRank, null);
                         board[tempRank][nFile] = pawn;
                         return false;
@@ -78,14 +78,14 @@ public class Pawn extends Piece{
                     return true;
                 }
                 else{
-                    System.out.println("Cannot kill nothing!");
+                   // System.out.println("Cannot kill nothing!");
                     return false;
                }
 
             }
             //check that you are killing opposite color
             if((isWhite && board[nRank][nFile].isWhite) || ((!isWhite) && !(board[nRank][nFile].isWhite))){
-                System.out.println("Dont kill your friend!");
+                //System.out.println("Dont kill your friend!");
                 return false;
             }
             if(isWhite && (nRank-oRank == -1) && (Math.abs(nFile-oFile) == 1)){
@@ -124,7 +124,7 @@ public class Pawn extends Piece{
             //check if two space
             else if((nRank-oRank) == -2){
                 if(hasMoved == true){
-                    System.out.println("Not first move! Cannot go two spaces");
+                  //  System.out.println("Not first move! Cannot go two spaces");
                     return false;
                 }
                 //check middle space
@@ -134,7 +134,7 @@ public class Pawn extends Piece{
                     return true;
                 }
                 else{
-                    System.out.println("Cannot jump over");
+                  //  System.out.println("Cannot jump over");
                     return false;
                 }
             }
@@ -151,7 +151,7 @@ public class Pawn extends Piece{
             //check if 2 spaces
             if((nRank - oRank) == 2){
                 if(hasMoved == true){
-                    System.out.println("Cannot move two spaces if not first turn");
+                 //   System.out.println("Cannot move two spaces if not first turn");
                     return false;
                 }
                 if(board[nRank-1][oFile] == null){

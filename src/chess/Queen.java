@@ -22,7 +22,7 @@ public class Queen extends Piece{
 
     @Override
     public boolean move(Piece[][] board, int oFile, int oRank, int nFile, int nRank)  {
-        System.out.println("Player is moving a "+name);
+       // System.out.println("Player is moving a "+name);
 
         if(moveStraight(board, oFile, oRank, nFile, nRank)){
             return true;
@@ -53,8 +53,8 @@ public class Queen extends Piece{
             if(oRank != nRank){ //vertical move
                 for(int i = minRank+1; i< maxRank; i++){ //plus one bc we do not want to check the spot of the rook
                     if (board[i][oFile] != null) {
-                        System.out.println("Something in the way: "+oFile+","+i);
-                        System.out.println(board[i][oFile]);
+                     //   System.out.println("Something in the way: "+oFile+","+i);
+                       // System.out.println(board[i][oFile]);
                         return false;
                     }
                 }
@@ -62,7 +62,7 @@ public class Queen extends Piece{
                 for(int i = minFile+1; i< maxFile; i++){
                     if (board[oRank][i] != null) {
 
-                        System.out.println("Something in the way: "+oFile+","+i);
+                        // System.out.println("Something in the way: "+oFile+","+i);
                         return false;
                     }
                 }
@@ -70,10 +70,10 @@ public class Queen extends Piece{
 
             if(board[nRank][nFile] != null){
                 if(board[oRank][oFile].isWhite == board[nRank][nFile].isWhite){
-                    System.out.println("Don't kill ur friend");
+                //    System.out.println("Don't kill ur friend");
                     return false;
                 } else {
-                    System.out.println("Slayed");
+                  //  System.out.println("Slayed");
                     //isKing(nRank, nFile);
                     return true;
                 }
@@ -101,7 +101,7 @@ public class Queen extends Piece{
             //System.out.println("Slope: "+slope);
 
             if (Math.abs(slope) != 1) {
-                System.out.println("Slope is not one");
+            //    System.out.println("Slope is not one");
                 return false;
             }
 
@@ -114,17 +114,17 @@ public class Queen extends Piece{
                 c = (oFile < nFile) ? ++c : --c;
 
                 if (board[r][c] != null){
-                    System.out.println("Something in the way: "+c+","+r);
+              //      System.out.println("Something in the way: "+c+","+r);
                     return false;
                 }
             }
 
             if(board[nRank][nFile] != null){
                 if(board[oRank][oFile].isWhite == board[nRank][nFile].isWhite){
-                    System.out.println("Don't kill ur friend");
+               //     System.out.println("Don't kill ur friend");
                     return false;
                 } else {
-                    System.out.println("Slayed");
+                //    System.out.println("Slayed");
                     //isKing(nRank, nFile);
                     return true;
                 }
