@@ -12,6 +12,8 @@ public class Chess {
      * Keeps track of the last piece that was moved - useful for enpassant
      */
     static Piece lastMove;
+    private static Piece whiteKing;
+    private static Piece blackKing;
 
     public static void main(String[] args) {
 
@@ -26,12 +28,16 @@ public class Chess {
         setBoard(board);
         printBoard(board);
 
-        Piece whiteKing = board[7][4];
-        Piece blackKing = board[0][4];
+        whiteKing = board[7][4];
+        blackKing = board[0][4];
 
 
         boolean check = false;
         boolean prevDraw = false;
+        int oFile;
+        int oRank;
+        int nFile;
+        int nRank;
 
 
         while(gameOn){ //can change to true actually
@@ -70,10 +76,10 @@ public class Chess {
 
                 //we are using 7 instead of 8 because if getValue returned a 0, we would go out of bounds
                 String[] moves = move.split(" ");
-                int oFile = getValue(moves[0].charAt(0));
-                int oRank = 7-getValue(moves[0].charAt(1));
-                int nFile = getValue(moves[1].charAt(0));
-                int nRank = 7-getValue(moves[1].charAt(1));
+                oFile = getValue(moves[0].charAt(0));
+                oRank = 7-getValue(moves[0].charAt(1));
+                nFile = getValue(moves[1].charAt(0));
+                nRank = 7-getValue(moves[1].charAt(1));
 
                 Piece newPosition = board[nRank][nFile];
 
@@ -100,7 +106,7 @@ public class Chess {
 
                         }
 
-                        System.out.println(board[oRank][oFile]);
+                        System.out.println(board[oRank][oFile]+"hello");
 
                         board[nRank][nFile] = board[oRank][oFile];
                         board[oRank][oFile] = null;
@@ -113,8 +119,8 @@ public class Chess {
                             }
                         }
 
-                        System.out.println("Updating last move");
-                        lastMove = board[nRank][nFile];
+//                        System.out.println("Updating last moved piece");
+//                        lastMove = board[nRank][nFile];
 
                     }else{
 
@@ -156,6 +162,8 @@ public class Chess {
             System.out.println("WhiteKing Position File "+whiteKing.file+" Rank: "+whiteKing.rank);
 
             //end turn code
+            System.out.println("Updating last moved piece");
+            lastMove = board[nRank][nFile];
             System.out.println();
             printBoard(board);
 
@@ -287,6 +295,8 @@ public class Chess {
         Piece temp = board[king.rank][king.file];
         board[king.rank][king.file] = null;
 
+        System.out.println(board[3][4]);
+
         System.out.println("Starting check");
         for(int r = 0; r<board.length; r++){
             for(int f = 0; f<board[r].length; f++){
@@ -302,7 +312,7 @@ public class Chess {
                         System.out.println("King's File: "+king.file);
                         System.out.println("King's Rank: "+king.rank);
                         board[king.rank][king.file] = temp;
-                        return true;
+                        return true; //this is being callled but from where?
                     }
                 }
             }
@@ -411,6 +421,11 @@ public class Chess {
             board[oRank][oFile] = new Queen(white);
         }
 
+    }
+
+    public static Piece returnKing(boolean isWhite){
+
+        return isWhite ? whiteKing : blackKing;
     }
 
 
