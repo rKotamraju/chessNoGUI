@@ -44,21 +44,21 @@ public class Chess {
 
         while(gameOn){ //can change to true actually
             if(check){
-                System.out.println("Check");
+                System.out.println("\nCheck");
             }
             if(isWhiteTurn){
-                System.out.print("White's Move: ");
+                System.out.print("\nWhite's Move: ");
                 move = in.nextLine();
             } else{
-                System.out.print("Black's Move: ");
+                System.out.print("\nBlack's Move: ");
                 move = in.nextLine();
             }
 
             if(move.equals("resign")){
                 if(isWhiteTurn){
-                    System.out.println("Black Wins");
+                    System.out.println("\nBlack Wins");
                 } else {
-                    System.out.println("White Wins");
+                    System.out.println("\nWhite Wins");
                 }
                 gameOn = false;
                 break; //-- gameOver;
@@ -69,7 +69,7 @@ public class Chess {
                 if(prevDraw == true){
                     if(move.equals("draw")){
                         gameOn = false;
-                        System.out.println("draw");
+                        System.out.println("\ndraw");
                         break; //game over
                     }
 
@@ -123,23 +123,22 @@ public class Chess {
                         }
 
 //                        System.out.println("Updating last moved piece");
-//                        lastMove = board[nRank][nFile];
+                        lastMove = board[nRank][nFile];
 
                     }else{
-
-                        System.out.println("Illegal move, try again.");
+                        System.out.println("\nIllegal move, try again.");
                         continue; // this should act as a redo
                     }
                 } else {
                     //System.out.println("WE ARE ON LINE 104");
-                    System.out.println("Illegal move, try again.");
+                    System.out.println("\nIllegal move, try again.");
                     continue;
                 }
 
                 //invalid
                 if(check(board, isWhiteTurn ? whiteKing : blackKing)){
                     //printBoard(board);
-                    //System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
+                    System.out.println("\nIllegal move, try again.");
                     reverseMove(board, oFile, oRank, nFile, nRank, newPosition);
                     lastMove = board[oRank][oFile];
                     //we don't have to update the king's position here because we don't allow the king to put itself in check
@@ -152,8 +151,8 @@ public class Chess {
                 if(check){
                    // System.out.println("running");
                     if(checkmate(board, isWhiteTurn ? blackKing : whiteKing)){
-                        System.out.println("Checkmate");
-                        System.out.println(isWhiteTurn ? "White Wins" : "Black Wins");
+                        System.out.println("\nCheckmate");
+                        System.out.println(isWhiteTurn ? "\nWhite Wins" : "\nBlack Wins");
                         break;
                     }
 
@@ -277,7 +276,7 @@ public class Chess {
         for(int i = 0; i<8; i++){
             System.out.print(" "+(char)(97+i)+" ");
         }
-        System.out.println("\n");
+        System.out.println();
 
     }
 

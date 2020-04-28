@@ -72,9 +72,10 @@ public class Pawn extends Piece{
                         return false;
                     }
 
+                    board[oRank][oFile] = this;
+                    board[nRank][nFile] = null;
                     int enpassantRank = this.isWhite ? nRank+1 : nRank-1;
                     board[enpassantRank][nFile] = null;
-
                     return true;
                 }
                 else{
