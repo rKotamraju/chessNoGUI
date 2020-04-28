@@ -123,23 +123,22 @@ public class Chess {
                         }
 
 //                        System.out.println("Updating last moved piece");
-//                        lastMove = board[nRank][nFile];
+                        lastMove = board[nRank][nFile];
 
                     }else{
-
-                        System.out.println("Illegal move, try again.");
+                        System.out.println("\nIllegal move, try again.");
                         continue; // this should act as a redo
                     }
                 } else {
                     //System.out.println("WE ARE ON LINE 104");
-                    System.out.println("Illegal move, try again.");
+                    System.out.println("\nIllegal move, try again.");
                     continue;
                 }
 
                 //invalid
                 if(check(board, isWhiteTurn ? whiteKing : blackKing)){
                     //printBoard(board);
-                    //System.out.println("WE ARE ON LINE 109 MOVE IS INVALID");
+                    System.out.println("\nIllegal move, try again.");
                     reverseMove(board, oFile, oRank, nFile, nRank, newPosition);
                     lastMove = board[oRank][oFile];
                     //we don't have to update the king's position here because we don't allow the king to put itself in check
